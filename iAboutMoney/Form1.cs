@@ -147,9 +147,13 @@ namespace iAboutMoney
             Graphics graphics = e.Graphics;
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             Pen pen = new Pen(Color.Green, 2);
+            Pen pen2 = new Pen(Color.Gray, 0.1F);
+           
 
             try
             {
+                graphics.DrawLine(pen2, 12, 201, 166, 146);
+
                 //January
                 LoadBalancesForChart(moneyHelper.Year + ". jan. ", balanceList);
                 int janB = balanceList.Last();

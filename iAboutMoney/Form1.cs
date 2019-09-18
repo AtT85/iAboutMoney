@@ -23,7 +23,7 @@ namespace iAboutMoney
         }
 
         Form2 form2= new Form2();
-
+        
         SerialPort myPort = new SerialPort();        
         MoneyHelper moneyHelper = new MoneyHelper();
 

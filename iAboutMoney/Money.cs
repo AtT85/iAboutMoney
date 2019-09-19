@@ -21,8 +21,7 @@ using ClassLibrary;
 namespace iAboutMoney
 {
     public partial class Form2 : Form
-    {
-        //TODO: Database throw away from main folder
+    {        
         //TODO: Screen resolution
 
         MoneyHelper moneyHelper2 = new MoneyHelper();        
@@ -100,7 +99,6 @@ namespace iAboutMoney
 
             labelMonth.Text = moneyHelper2.Month.ToString();
         }
-
 
 
         /// <summary>
@@ -448,7 +446,10 @@ namespace iAboutMoney
         
         //DATABASE
         
-        //Yearly data from database
+        /// <summary>
+        /// Yearly income from database for set income label 
+        /// </summary>
+        /// <param name="y">searched year</param>
         private void YearlyIncomeFromDatab(int y)
         {
             List<int> ListYearIncome = new List<int>();
@@ -458,15 +459,20 @@ namespace iAboutMoney
             DataContext da = new DataContext(connString);
             Table<MoneyInfoTable> moneyDb = da.GetTable<MoneyInfoTable>();
             var varYearlyIncome = from c in moneyDb where (c.Year == y && c.Type == "Income") select c.Money;
+
             foreach (var item in varYearlyIncome)
             {
-
                 ListYearIncome.Add(item);
-
             }
+
             intYearlyIncome = ListYearIncome.Sum();
             labelIncome.Text = intYearlyIncome.ToString("C0");
         }
+
+        /// <summary>
+        /// Yearly expense from database for set expense label
+        /// </summary>
+        /// <param name="y">searched year</param>
         private void YearlyExpenseFromDatab(int y)
         {
             List<int> ListYearExpense = new List<int>();
@@ -476,15 +482,20 @@ namespace iAboutMoney
             DataContext da = new DataContext(connString);
             Table<MoneyInfoTable> moneyDb = da.GetTable<MoneyInfoTable>();
             var varYearlyExpense = from c in moneyDb where (c.Year == y && c.Type == "Expense") select c.Money;
+
             foreach (var item in varYearlyExpense)
             {
-
                 ListYearExpense.Add(item);
-
             }
+
             intYearlyExpense = ListYearExpense.Sum();
             labelExpense.Text = intYearlyExpense.ToString("C0");
         }
+
+        /// <summary>
+        /// Yearly credit from database for set credit label
+        /// </summary>
+        /// <param name="y">searched year</param>
         private void YearlyCreditFromDatab(int y)
         {
             List<int> ListYearCredit = new List<int>();
@@ -494,15 +505,20 @@ namespace iAboutMoney
             DataContext da = new DataContext(connString);
             Table<MoneyInfoTable> moneyDb = da.GetTable<MoneyInfoTable>();
             var varYearlyCredit = from c in moneyDb where (c.Year == y && c.Type == "Credit") select c.Money;
+
             foreach (var item in varYearlyCredit)
             {
-
                 ListYearCredit.Add(item);
-
             }
+
             intYearlyCredit = ListYearCredit.Sum();
             labelCredit.Text = intYearlyCredit.ToString("C0");
         }
+
+        /// <summary>
+        /// Yearly fueling from database for set fueling label
+        /// </summary>
+        /// <param name="y">searched year</param>
         private void YearlyFuelingFromDatab(int y)
         {
             List<int> ListYearFueling = new List<int>();
@@ -512,17 +528,21 @@ namespace iAboutMoney
             DataContext da = new DataContext(connString);
             Table<MoneyInfoTable> moneyDb = da.GetTable<MoneyInfoTable>();
             var varYearlyFueling = from c in moneyDb where (c.Year == y && c.Type == "Fueling") select c.Money;
+
             foreach (var item in varYearlyFueling)
             {
-
                 ListYearFueling.Add(item);
-
             }
+
             intYearlyFueling = ListYearFueling.Sum();
             labelFueling.Text = intYearlyFueling.ToString("C0");
         }
 
-        //Monthly data from Database
+        /// <summary>
+        /// Monthly income from database for set income label
+        /// </summary>
+        /// <param name="y">searched year</param>
+        /// <param name="m">searched month</param>
         private void MonthlyIncomeFromDatab(int y, string m)
         {
             List<int> monthlyIncomeList = new List<int>();
@@ -532,15 +552,21 @@ namespace iAboutMoney
             DataContext da = new DataContext(connString);
             Table<MoneyInfoTable> moneyDb = da.GetTable<MoneyInfoTable>();
             var varMonthlyIncome = from c in moneyDb where (c.Year==y && c.Month == m && c.Type == "Income") select c.Money;
+
             foreach (var item in varMonthlyIncome)
             {
-
                 monthlyIncomeList.Add(item);
-
             }
+
             intMonthlyIncome = monthlyIncomeList.Sum();
             labelIncome.Text = intMonthlyIncome.ToString("C0");
         }
+
+        /// <summary>
+        /// Monthly expense from database for set expense label
+        /// </summary>
+        /// <param name="y">searched year</param>
+        /// <param name="m">searched month</param>
         private void MonthlyExpenseFromDatab(int y, string m)
         {
             List<int> monthlyExpenseList = new List<int>();
@@ -550,15 +576,21 @@ namespace iAboutMoney
             DataContext da = new DataContext(connString);
             Table<MoneyInfoTable> moneyDb = da.GetTable<MoneyInfoTable>();
             var varMonthlylyExpense = from c in moneyDb where (c.Year == y && c.Month == m && c.Type == "Expense") select c.Money;
+
             foreach (var item in varMonthlylyExpense)
             {
-
                 monthlyExpenseList.Add(item);
-
             }
+
             intMonthlyExpense = monthlyExpenseList.Sum();
             labelExpense.Text = intMonthlyExpense.ToString("C0");
         }
+
+        /// <summary>
+        /// Monthly credit from database for set credit label
+        /// </summary>
+        /// <param name="y">searched year</param>
+        /// <param name="m">searched month</param>
         private void MonthlyCreditFromDatab(int y, string m)
         {
             List<int> monthlyCreditList = new List<int>();
@@ -568,15 +600,21 @@ namespace iAboutMoney
             DataContext da = new DataContext(connString);
             Table<MoneyInfoTable> moneyDb = da.GetTable<MoneyInfoTable>();
             var varMonthlylyCredit = from c in moneyDb where (c.Year == y && c.Month == m && c.Type == "Credit") select c.Money;
+
             foreach (var item in varMonthlylyCredit)
             {
-
                 monthlyCreditList.Add(item);
-
             }
+
             intMonthlyCredit = monthlyCreditList.Sum();
             labelCredit.Text = intMonthlyCredit.ToString("C0");
         }
+
+        /// <summary>
+        /// Monthly fueling from database for set fueling label
+        /// </summary>
+        /// <param name="y">searched year</param>
+        /// <param name="m">searched month</param>
         private void MonthlyFuelingFromDatab(int y, string m)
         {
             List<int> monthlyFuelingList = new List<int>();
@@ -586,12 +624,12 @@ namespace iAboutMoney
             DataContext da = new DataContext(connString);
             Table<MoneyInfoTable> moneyDb = da.GetTable<MoneyInfoTable>();
             var varMonthlyFueling = from c in moneyDb where (c.Year == y && c.Month == m && c.Type == "Fueling") select c.Money;
+
             foreach (var item in varMonthlyFueling)
             {
-
                monthlyFuelingList.Add(item);
-
             }
+
             intMonthlyFueling = monthlyFuelingList.Sum();
             labelFueling.Text = intMonthlyFueling.ToString("C0");
         }
@@ -635,7 +673,14 @@ namespace iAboutMoney
             LoadSum();            
         }
 
-
+        /// <summary>
+        /// Decide year or month
+        /// Income, Expense, Credit, Fueling
+        /// LoadSum
+        /// Set month label
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Prev_Click(object sender, EventArgs e)
         {
             var dateAndTime = DateTime.Now;
@@ -866,6 +911,15 @@ namespace iAboutMoney
                     break;
             }
         }
+
+        /// <summary>
+        /// Decide year or month
+        /// Income, Expense, Credit, Fueling
+        /// LoadSum
+        /// Set month label
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Next_Click(object sender, EventArgs e)
         {
             var dateAndTime = DateTime.Now;
@@ -1099,9 +1153,12 @@ namespace iAboutMoney
             }
         }
 
-        //TODO: Repair saving to database function
-        //SAVING TO DATABASE    
 
+        
+        //SAVING TO DATABASE    
+        /// <summary>
+        /// Read saved times to list
+        /// </summary>
         private void ReadSavingTime()
         {
             if (File.Exists(moneyHelper2.SavedMonthFilePath))
@@ -1109,6 +1166,11 @@ namespace iAboutMoney
                 moneyHelper2.SavedMonthList = File.ReadAllLines(moneyHelper2.SavedMonthFilePath).ToList();
             }
         }
+
+        /// <summary>
+        /// ReadSavingTime
+        /// if not save in this month LoadSavingData
+        /// </summary>
         private void Save()
         {
             ReadSavingTime();            
@@ -1120,98 +1182,108 @@ namespace iAboutMoney
                     moneyHelper2.Saved = true;
                 }
             }
+
             if (moneyHelper2.Saved == false)
             {
                 LoadSavingData();
             }
         }
         
+        /// <summary>
+        /// Setup saving month
+        /// Call SaveToDatabase, WriteSavingTimeToFile
+        /// </summary>
         private void LoadSavingData()
         {
             string searchString;
+
             switch (moneyHelper2.Month)
             {
                 case "January":
-                    searchString = moneyHelper2.Year + ". dec. ";
-                    SaveToDatabase(searchString, "December");
-                    WriteSavedMonthToFile();
+                    searchString = ". dec. ";
+                    SaveToDatabase(moneyHelper2.Year-1, searchString, "December");
+                    WriteSavingTimeToFile();
                     break;
                 case "February":
-                    searchString = moneyHelper2.Year + ". jan. ";
-                    SaveToDatabase(searchString, "January");
-                    WriteSavedMonthToFile();
+                    searchString = ". jan. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "January");
+                    WriteSavingTimeToFile();
                     break;
                 case "March":
-                    searchString = moneyHelper2.Year + ". febr. ";
-                    SaveToDatabase(searchString, "February");
-                    WriteSavedMonthToFile();
+                    searchString = ". febr. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "February");
+                    WriteSavingTimeToFile();
                     break;
                 case "April":
-                    searchString = moneyHelper2.Year + ". márc. ";
-                    SaveToDatabase(searchString, "March");
-                    WriteSavedMonthToFile();
+                    searchString = ". márc. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "March");
+                    WriteSavingTimeToFile();
                     break;
                 case "May":
-                    searchString = moneyHelper2.Year + ". ápr. ";
-                    SaveToDatabase(searchString, "April");
-                    WriteSavedMonthToFile();
+                    searchString = ". ápr. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "April");
+                    WriteSavingTimeToFile();
                     break;
                 case "June":
-                    searchString = moneyHelper2.Year + ". máj. ";
-                    SaveToDatabase(searchString, "May");
-                    WriteSavedMonthToFile();
+                    searchString = ". máj. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "May");
+                    WriteSavingTimeToFile();
                     break;
                 case "July":
-                    searchString = moneyHelper2.Year + ". jún. ";
-                    SaveToDatabase(searchString, "Juny");
-                    WriteSavedMonthToFile();
+                    searchString = ". jún. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "Juny");
+                    WriteSavingTimeToFile();
                     break;
                 case "August":
-                    searchString = moneyHelper2.Year + ". júl. ";
-                    SaveToDatabase(searchString, "July");
-                    WriteSavedMonthToFile();
+                    searchString = ". júl. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "July");
+                    WriteSavingTimeToFile();
                     break;
                 case "September":
-                    searchString = moneyHelper2.Year + ". aug. ";
-                    SaveToDatabase(searchString, "August");
-                    WriteSavedMonthToFile();
+                    searchString = ". aug. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "August");
+                    WriteSavingTimeToFile();
                     break;
                 case "October":
-                    searchString = moneyHelper2.Year + ". szept. ";
-                    SaveToDatabase(searchString, "September");
-                    WriteSavedMonthToFile();
+                    searchString = ". szept. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "September");
+                    WriteSavingTimeToFile();
                     break;
                 case "November":
-                    searchString = moneyHelper2.Year + ". okt. ";
-                    SaveToDatabase(searchString, "October");
-                    WriteSavedMonthToFile();
+                    searchString = ". okt. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "October");
+                    WriteSavingTimeToFile();
                     break;
                 case "December":
-                    searchString = moneyHelper2.Year + ". nov. ";
-                    SaveToDatabase(searchString, "November");
-                    WriteSavedMonthToFile();
+                    searchString = ". nov. ";
+                    SaveToDatabase(moneyHelper2.Year, searchString, "November");
+                    WriteSavingTimeToFile();
                     break;
             }
         }
-        private void SaveToDatabase(string searchMonth, string monthToDatabase)
+
+        /// <summary>
+        /// Save previous month to database
+        /// </summary>
+        /// <param name="year">year</param>
+        /// <param name="month">previous month</param>
+        /// <param name="monthToDatabase">to month field in database</param>
+        private void SaveToDatabase(int year, string month, string monthToDatabase)
         {
             List<int> monthlySaveIncomeList = new List<int>();
             int intSaveIncome;
 
             //Income
-
             foreach (var item in moneyHelper2.SmsArray)
             {
-                if (item.Contains(searchMonth))
+                if (item.Contains(year+month))
                 {
-
                     if (item.Contains("SIKERTELEN") || item.Contains("STORNO"))
                     {
 
                     }
                     else
-                    {
-                        //Income
+                    {                        
                         string haviBevetel = moneyHelper2.GetBetween(item, "S:+", ",-HUF;");
                         string haviBevetelReplaced = haviBevetel.Replace(".", "");
                         if (int.TryParse(haviBevetelReplaced, out int intHaviBevetel))
@@ -1231,11 +1303,10 @@ namespace iAboutMoney
                             monthlySaveIncomeList.Add(intHaviBevetel3);
                         }
                     }
-
                 }
             }
-            intSaveIncome = monthlySaveIncomeList.Sum();
 
+            intSaveIncome = monthlySaveIncomeList.Sum();
 
             con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
             con.Open();
@@ -1252,16 +1323,14 @@ namespace iAboutMoney
 
             foreach (var item in moneyHelper2.SmsArray)
             {
-                if (item.Contains(searchMonth))
+                if (item.Contains(year + month))
                 {
-
                     if (item.Contains("SIKERTELEN") || item.Contains("STORNO"))
                     {
 
                     }
                     else if (item.Contains("TÖRLESZTÉS") || item.Contains("khitel Központ Zrt."))
                     {
-                        //Credit
                         string haviTorlesztes = moneyHelper2.GetBetween(item, "S:-", ",-HUF");
                         string dataTorlesztesReplaced = haviTorlesztes.Replace(".", "");
                         if (int.TryParse(dataTorlesztesReplaced, out int intHaviTorlesztes))
@@ -1269,9 +1338,9 @@ namespace iAboutMoney
                             monthlySaveCreditList.Add(intHaviTorlesztes);
                         }
                     }
-
                 }
             }
+
             foreach (var item in monthlySaveCreditList)
             {
                 con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
@@ -1290,18 +1359,16 @@ namespace iAboutMoney
 
             foreach (var item in moneyHelper2.SmsArray)
             {
-                if (item.Contains(searchMonth))
+                if (item.Contains(year + month))
                 {
-
                     if (item.Contains("SIKERTELEN") || item.Contains("STORNO") || item.Contains("khitel Központ Zrt.") || item.Contains("SHELL TÖLTÖ")
                         || item.Contains("MOL TÖLTÖ") || item.Contains("GP T") || item.Contains("AUCHAN AUTBEN") || item.Contains("; OMV"))
                     {
 
                     }
-                    else if (item.Contains("ATM") || item.Contains("s/z") || item.Contains("rty") && item.Contains("s v") || item.Contains("NAPKÖZBENI")
+               else if (item.Contains("ATM") || item.Contains("s/z") || item.Contains("rty") && item.Contains("s v") || item.Contains("NAPKÖZBENI")
                           || item.Contains("BIZTOSIT") || item.Contains("VAL KAPCS. DIJ") || item.Contains("TUTAL"))
                     {
-                        //Expense
                         string haviEgyebKiadas = moneyHelper2.GetBetween(item, ": -", " HUF;");
                         string haviEgyebKiadasReplaced = haviEgyebKiadas.Replace(".", "");
                         if (int.TryParse(haviEgyebKiadasReplaced, out int intHaviEgyebKiadas))
@@ -1315,9 +1382,9 @@ namespace iAboutMoney
                             monthlySaveExpenseList.Add(intHaviEgyebKiadas2);
                         }
                     }
-
                 }
             }
+
             foreach (var item in monthlySaveExpenseList)
             {
                 con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
@@ -1338,19 +1405,18 @@ namespace iAboutMoney
             int intSaveFuelingAuchan;
             int intSaveFuelingAuchanStorno;
             int intRealFuelingAuchan;
+
             foreach (var item in moneyHelper2.SmsArray)
             {
-                if (item.Contains(searchMonth))
+                if (item.Contains(year + month))
                 {
-
                     if (item.Contains("SIKERTELEN") || item.Contains("STORNO") && !item.Contains("AUCHAN AUTBEN"))
                     {
 
                     }
-                    else if (item.Contains("SHELL TÖLTÖ") || item.Contains("MOL TÖLTÖ") ||
+               else if (item.Contains("SHELL TÖLTÖ") || item.Contains("MOL TÖLTÖ") ||
                         item.Contains("GP T") || item.Contains("; OMV"))
                     {
-                        //Tankolas
                         string haviTankolas = moneyHelper2.GetBetween(item, ": -", " HUF;");
                         string haviTankolasReplaced = haviTankolas.Replace(".", "");
                         if (int.TryParse(haviTankolasReplaced, out int intHaviTankolas))
@@ -1364,6 +1430,7 @@ namespace iAboutMoney
                             monthlySaveFuelingList.Add(intHaviTankolas2);
                         }
                     }
+
                     //Auchan
                     else if (item.Contains("AUCHAN AUTBEN") && !item.Contains("STORNO"))
                     {
@@ -1389,13 +1456,14 @@ namespace iAboutMoney
                             monthlySaveFuelingAuchanStornoList.Add(intHaviTankolasStorno);
                         }
                     }
-
                 }
             }
+
             intSaveFuelingAuchan = monthlySaveFuelingAuchanList.Sum();
             intSaveFuelingAuchanStorno = monthlySaveFuelingAuchanStornoList.Sum();
             intRealFuelingAuchan = intSaveFuelingAuchan - intSaveFuelingAuchanStorno;
             monthlySaveFuelingList.Add(intRealFuelingAuchan);
+
             foreach (var item in monthlySaveFuelingList)
             {
                 con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
@@ -1408,10 +1476,12 @@ namespace iAboutMoney
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
-
-
         }
-        private void WriteSavedMonthToFile()
+
+        /// <summary>
+        /// Write saving time(month) to file
+        /// </summary>
+        private void WriteSavingTimeToFile()
         {
             using (FileStream stream = new FileStream(moneyHelper2.SavedMonthFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
             {
@@ -1425,6 +1495,13 @@ namespace iAboutMoney
 
 
         //DOWNLOAD FILE
+        /// <summary>
+        /// Call DropboxClass Run method
+        /// Finish label 
+        /// LoadDataFromFile, LoadMonthData, LoadSum 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DownloadFileTitle_Click(object sender, EventArgs e)
         {
             var task = Task.Run((Func<Task>)DropboxClass.Run);
@@ -1436,19 +1513,26 @@ namespace iAboutMoney
         }
 
 
-       
-        private void SwitchToRoutineForm_Click(object sender, EventArgs e)
+       /// <summary>
+       /// Switch to chart
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
+        private void SwitchToChartForm_Click(object sender, EventArgs e)
         {
             Hide();            
         }
 
+        /// <summary>
+        /// Save
+        /// Exit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExitForm2_Click(object sender, EventArgs e)
         {
             Save();
             Application.Exit();
-        }
-
-
-
+        }        
     }
 }

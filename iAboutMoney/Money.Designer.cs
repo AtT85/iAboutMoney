@@ -51,7 +51,7 @@
             this.labelMonth = new System.Windows.Forms.Label();
             this.labelBalanceActual = new System.Windows.Forms.Label();
             this.labelBalance = new System.Windows.Forms.Label();
-            this.switchToRoutineForm = new System.Windows.Forms.Label();
+            this.switchToChartForm = new System.Windows.Forms.Label();
             this.bunifuGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ExitForm2)).BeginInit();
             this.SuspendLayout();
@@ -81,7 +81,7 @@
             this.bunifuGradientPanel1.Controls.Add(this.labelMonth);
             this.bunifuGradientPanel1.Controls.Add(this.labelBalanceActual);
             this.bunifuGradientPanel1.Controls.Add(this.labelBalance);
-            this.bunifuGradientPanel1.Controls.Add(this.switchToRoutineForm);
+            this.bunifuGradientPanel1.Controls.Add(this.switchToChartForm);
             this.bunifuGradientPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bunifuGradientPanel1.GradientBottomLeft = System.Drawing.Color.White;
             this.bunifuGradientPanel1.GradientBottomRight = System.Drawing.Color.White;
@@ -376,20 +376,20 @@
             this.labelBalance.TabIndex = 16;
             this.labelBalance.Text = "Balance:";
             // 
-            // switchToRoutineForm
+            // switchToChartForm
             // 
-            this.switchToRoutineForm.AutoSize = true;
-            this.switchToRoutineForm.BackColor = System.Drawing.Color.Transparent;
-            this.switchToRoutineForm.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.switchToRoutineForm.Font = new System.Drawing.Font("Segoe UI Historic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.switchToRoutineForm.ForeColor = System.Drawing.Color.Black;
-            this.switchToRoutineForm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.switchToRoutineForm.Location = new System.Drawing.Point(-2, 267);
-            this.switchToRoutineForm.Name = "switchToRoutineForm";
-            this.switchToRoutineForm.Size = new System.Drawing.Size(31, 13);
-            this.switchToRoutineForm.TabIndex = 15;
-            this.switchToRoutineForm.Text = "Back";
-            this.switchToRoutineForm.Click += new System.EventHandler(this.SwitchToRoutineForm_Click);
+            this.switchToChartForm.AutoSize = true;
+            this.switchToChartForm.BackColor = System.Drawing.Color.Transparent;
+            this.switchToChartForm.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.switchToChartForm.Font = new System.Drawing.Font("Segoe UI Historic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.switchToChartForm.ForeColor = System.Drawing.Color.Black;
+            this.switchToChartForm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.switchToChartForm.Location = new System.Drawing.Point(-2, 267);
+            this.switchToChartForm.Name = "switchToChartForm";
+            this.switchToChartForm.Size = new System.Drawing.Size(31, 13);
+            this.switchToChartForm.TabIndex = 15;
+            this.switchToChartForm.Text = "Back";
+            this.switchToChartForm.Click += new System.EventHandler(this.SwitchToChartForm_Click);
             // 
             // Form2
             // 
@@ -416,7 +416,7 @@
 
         private Bunifu.Framework.UI.BunifuGradientPanel bunifuGradientPanel1;
         private System.Windows.Forms.Label DownloadFileTitle;
-        private System.Windows.Forms.Label switchToRoutineForm;
+        private System.Windows.Forms.Label switchToChartForm;
         private System.Windows.Forms.Label labelMonth;
         private System.Windows.Forms.Label labelBalanceActual;
         private System.Windows.Forms.Label labelBalance;

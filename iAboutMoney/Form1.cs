@@ -81,7 +81,7 @@ namespace iAboutMoney
 
         public void LoadDatasFromFile()
         {
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\totha\Source\Repos\iAboutMoney\iAboutMoney\bin\Debug");
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\totha\Source\Repos\iAboutMoneyGit\iAboutMoney\bin\Debug");
             FileInfo[] Files = d.GetFiles("*.xml");
             foreach (var item in Files)
             {

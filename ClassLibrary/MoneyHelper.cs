@@ -35,33 +35,6 @@ namespace ClassLibrary
                 }
             }
             return String.Empty;
-        }
-        /*
-        public void LoadDatasFromFile()
-        {
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\totha\Source\Repos\iAboutMoney\iAboutMoney\bin\Debug");
-            FileInfo[] Files = d.GetFiles("*.xml");
-            foreach (var item in Files)
-            {
-                if (item.Name.Contains("sms-"))
-                {
-                    File.Move(item.Name, @"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Dropbox\" + item.Name);
-                }
-            }
-
-            var files = Directory.GetFiles(@"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Dropbox", "*.xml");
-            foreach (var item in files)
-            {
-                if (item.Contains("sms-"))
-                {
-                    FilePath = item;
-                }
-            }
-
-            string information = File.ReadAllText(FilePath);
-            SmsArray = Regex.Split(information, @"<sms protocol=");
-        }
-        */
-       
+        }      
     }
 }

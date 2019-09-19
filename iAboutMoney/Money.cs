@@ -21,9 +21,7 @@ using ClassLibrary;
 namespace iAboutMoney
 {
     public partial class Form2 : Form
-    {        
-        //TODO: Screen resolution
-
+    {
         MoneyHelper moneyHelper2 = new MoneyHelper();        
 
         SqlCommand cmd;
@@ -100,7 +98,6 @@ namespace iAboutMoney
             labelMonth.Text = moneyHelper2.Month.ToString();
         }
 
-
         /// <summary>
         /// Move out sms file from main folder
         /// Read the file to string, then to SmsArray /sms/
@@ -133,6 +130,8 @@ namespace iAboutMoney
         }
 
                
+
+
         /// <summary>
         /// LoadBalance
         /// LoadIncome      //with actual month
@@ -208,7 +207,6 @@ namespace iAboutMoney
             }
         }        
 
-
         /// <summary>
         /// Set Income label with SmsArray
         /// </summary>
@@ -253,7 +251,6 @@ namespace iAboutMoney
             income = monthlyIncomeList.Sum();
             labelIncome.Text = income.ToString("C0");
         }       
-
 
         /// <summary>
         /// Set Expense, Credit, Fueling label with SmsArray
@@ -394,8 +391,6 @@ namespace iAboutMoney
             fueling = monthlyFuelingList.Sum();
             labelFueling.Text = fueling.ToString("C0");
         }
-
-
        
         /// <summary>
         /// Set Balance label with SmsArray
@@ -425,7 +420,6 @@ namespace iAboutMoney
             labelBalanceActual.Text = intActualBalance.ToString("C0");
         }
 
-
         /// <summary>
         /// Set Sum label with other labels
         /// </summary>
@@ -444,8 +438,9 @@ namespace iAboutMoney
             labelSumResult.Text = sumrResult.ToString("C0");
         }          
         
-        //DATABASE
-        
+
+
+        //DATABASE        
         /// <summary>
         /// Yearly income from database for set income label 
         /// </summary>
@@ -637,7 +632,8 @@ namespace iAboutMoney
         
 
 
-        //NAVIGATE
+
+        //NAVIGATiON
         /// <summary>
         /// Set Month label to actual Year
         /// Yearly(Income&Expense&Credit&Fueling)FromDatab
@@ -1154,6 +1150,7 @@ namespace iAboutMoney
         }
 
 
+
         
         //SAVING TO DATABASE    
         /// <summary>
@@ -1161,9 +1158,9 @@ namespace iAboutMoney
         /// </summary>
         private void ReadSavingTime()
         {
-            if (File.Exists(moneyHelper2.SavedMonthFilePath))
+            if (File.Exists(moneyHelper2.SavingTimeFilePath))
             {
-                moneyHelper2.SavedMonthList = File.ReadAllLines(moneyHelper2.SavedMonthFilePath).ToList();
+                moneyHelper2.SavedMonthList = File.ReadAllLines(moneyHelper2.SavingTimeFilePath).ToList();
             }
         }
 
@@ -1483,7 +1480,7 @@ namespace iAboutMoney
         /// </summary>
         private void WriteSavingTimeToFile()
         {
-            using (FileStream stream = new FileStream(moneyHelper2.SavedMonthFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+            using (FileStream stream = new FileStream(moneyHelper2.SavingTimeFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
@@ -1492,6 +1489,7 @@ namespace iAboutMoney
             }
         }
         
+
 
 
         //DOWNLOAD FILE
@@ -1511,6 +1509,8 @@ namespace iAboutMoney
             LoadMonthData();
             LoadSum();
         }
+
+
 
 
        /// <summary>

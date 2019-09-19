@@ -12,7 +12,7 @@ namespace ClassLibrary
         public int Year { get; set; }
         public string Month { get; set; }
         public bool Saved { get; set; }
-        public string SavedMonthFilePath { get; set; } = "savedMonthFile.dat";
+        public string SavingTimeFilePath { get; set; } = "savingTime.dat";
         public List<string> SavedMonthList { get; set; }
         public string[] SmsArray { get; set; }
         public string FilePath { get; set; }
@@ -34,6 +34,7 @@ namespace ClassLibrary
                     return strSource.Substring(startIdx, endIdx - startIdx);
                 }
             }
+
             return String.Empty;
         }      
     }

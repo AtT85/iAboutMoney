@@ -20,6 +20,9 @@ namespace iAboutMoney
         public Form1()
         {
             InitializeComponent();
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            this.Location = new Point(screenWidth - 190, 50);
         }
 
         Form2 form2= new Form2();
@@ -39,6 +42,7 @@ namespace iAboutMoney
         {
             LoadDatasFromFile();
             SetDate();
+
             try
             {
                 myPort.BaudRate = 9600;
@@ -59,8 +63,8 @@ namespace iAboutMoney
         {
             var dateAndTime = DateTime.Now;
             moneyHelper.Year = dateAndTime.Year;            
-        }
-        
+        }        
+
         /// <summary>
         /// Read temperature from myPort to text
         /// </summary>
@@ -79,6 +83,13 @@ namespace iAboutMoney
             }            
         }
 
+
+
+
+        /// <summary>
+        /// Copy sms file out from main folder
+        /// Read sms to array
+        /// </summary>
         public void LoadDatasFromFile()
         {
             DirectoryInfo d = new DirectoryInfo(@"C:\Users\totha\Source\Repos\iAboutMoneyGit\iAboutMoney\bin\Debug");
@@ -104,11 +115,14 @@ namespace iAboutMoney
             moneyHelper.SmsArray = Regex.Split(information, @"<sms protocol=");
         }
 
+
+
+
         /// <summary>
         /// Foreach in smsArray for Balances in Chart
         /// </summary>
         /// <param name="date">Look for which month</param>
-        /// <param name="list">Add balance to list</param>
+        /// <param name="list">Add balances to list</param>
         public void LoadBalancesForChart(string date, List<int> list)
         {
 
@@ -132,8 +146,6 @@ namespace iAboutMoney
                 }
             }
         }
-
-
 
         /// <summary>
         /// Drawing the actual year Chart
@@ -242,6 +254,8 @@ namespace iAboutMoney
 
 
 
+
+
         /// <summary>
         /// Open Form2
         /// </summary>
@@ -249,13 +263,14 @@ namespace iAboutMoney
         /// <param name="e"></param>
         private void SwitchToSecondForm_Click(object sender, EventArgs e)
         {
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            form2.Location = new Point(screenWidth - 190, 50);
+
             form2.Show();
         }
 
-
-
         /// <summary>
-        /// Exit Click
+        /// Exit
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -13,14 +13,21 @@ namespace ClassLibrary
     {
         public static string Token { get; set; } 
 
-        public static async Task Run()
+        public static string getToken()
         {
-            string RealFile = "";
-            string folder = "/Apps/SMSBackupRestore/";
             using (StreamReader reader = new StreamReader(@"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Dropbox\token.dat"))
             {
                 Token = reader.ReadLine();
             }
+            return Token;
+        }
+
+        public static async Task Run()
+        {
+            string RealFile = "";
+            string folder = "/Apps/SMSBackupRestore/";
+
+            getToken();
 
             using (var dbx = new DropboxClient(Token))
             {

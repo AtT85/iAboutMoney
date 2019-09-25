@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iAboutMoney", "iAboutMoney\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{74C78320-28B0-4B41-8EDC-B1111921FD9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iAboutMoney.UnitTests", "iAboutMoney.UnitTests\iAboutMoney.UnitTests.csproj", "{84B92F9F-623C-4A37-B1D8-CC7C26F0FD6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{74C78320-28B0-4B41-8EDC-B1111921FD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74C78320-28B0-4B41-8EDC-B1111921FD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74C78320-28B0-4B41-8EDC-B1111921FD9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84B92F9F-623C-4A37-B1D8-CC7C26F0FD6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84B92F9F-623C-4A37-B1D8-CC7C26F0FD6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84B92F9F-623C-4A37-B1D8-CC7C26F0FD6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84B92F9F-623C-4A37-B1D8-CC7C26F0FD6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

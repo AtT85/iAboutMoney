@@ -13,7 +13,7 @@ namespace ClassLibrary
     {
         public static string Token { get; set; } 
 
-        public static string getToken()
+        public static string GetToken()
         {
             using (StreamReader reader = new StreamReader(@"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Dropbox\token.dat"))
             {
@@ -27,7 +27,7 @@ namespace ClassLibrary
             string RealFile = "";
             string folder = "/Apps/SMSBackupRestore/";
 
-            getToken();
+            GetToken();
 
             using (var dbx = new DropboxClient(Token))
             {

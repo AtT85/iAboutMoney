@@ -14,12 +14,12 @@ namespace ClassLibrary
         public bool Saved { get; set; }
         public string SavingTimeFilePath { get; set; } = "savingTime.dat";
         public List<string> SavedMonthList { get; set; }
-        public string[] SmsArray { get; set; }
+        public static string[] SmsArray { get; set; }
         public string FilePath { get; set; }
 
 
 
-
+        /*
         public string GetBetween(string strSource, string strStart, string strEnd)
         {
             const int kNotFound = -1;
@@ -36,6 +36,6 @@ namespace ClassLibrary
             }
 
             return String.Empty;
-        }      
+        }   */   
     }
 }

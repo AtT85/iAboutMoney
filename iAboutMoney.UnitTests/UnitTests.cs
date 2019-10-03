@@ -24,9 +24,9 @@ namespace iAboutMoney.UnitTests
             int number = 64;
 
             string testtoken = DropboxClass.GetToken();
-            int count = testtoken.Length;
+            int result = testtoken.Length;
 
-            Assert.AreEqual(number, count);
+            Assert.AreEqual(number, result);
         }        
     }
 }

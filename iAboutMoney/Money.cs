@@ -22,7 +22,7 @@ namespace iAboutMoney
 {
     public partial class Form2 : Form
     {
-        MoneyHelper moneyHelper2 = new MoneyHelper();        
+        MoneyHelper MoneyHelper = new MoneyHelper();        
 
         SqlCommand cmd;
         SqlConnection con;
@@ -52,50 +52,50 @@ namespace iAboutMoney
         private void SetDate()
         {
             var dateAndTime = DateTime.Now;
-            moneyHelper2.Year = dateAndTime.Year;
+            MoneyHelper.Year = dateAndTime.Year;
 
             string tempMonth = dateAndTime.Month.ToString();
             switch (tempMonth)
             {
                 case "1":
-                    moneyHelper2.Month = "January";
+                    MoneyHelper.Month = "January";
                     break;
                 case "2":
-                    moneyHelper2.Month = "February";
+                    MoneyHelper.Month = "February";
                     break;
                 case "3":
-                    moneyHelper2.Month = "March";
+                    MoneyHelper.Month = "March";
                     break;
                 case "4":
-                    moneyHelper2.Month = "April";
+                    MoneyHelper.Month = "April";
                     break;
                 case "5":
-                    moneyHelper2.Month = "May";
+                    MoneyHelper.Month = "May";
                     break;
                 case "6":
-                    moneyHelper2.Month = "June";
+                    MoneyHelper.Month = "June";
                     break;
                 case "7":
-                    moneyHelper2.Month = "July";
+                    MoneyHelper.Month = "July";
                     break;
                 case "8":
-                    moneyHelper2.Month = "August";
+                    MoneyHelper.Month = "August";
                     break;
                 case "9":
-                    moneyHelper2.Month = "September";
+                    MoneyHelper.Month = "September";
                     break;
                 case "10":
-                    moneyHelper2.Month = "October";
+                    MoneyHelper.Month = "October";
                     break;
                 case "11":
-                    moneyHelper2.Month = "November";
+                    MoneyHelper.Month = "November";
                     break;
                 case "12":
-                    moneyHelper2.Month = "December";
+                    MoneyHelper.Month = "December";
                     break;
             }
 
-            labelMonth.Text = moneyHelper2.Month.ToString();
+            labelMonth.Text = MoneyHelper.Month.ToString();
         }
 
         /// <summary>
@@ -121,12 +121,12 @@ namespace iAboutMoney
             {
                 if (item.Contains("sms-"))
                 {
-                    moneyHelper2.FilePath = item;
+                    MoneyHelper.FilePath = item;
                 }
             }
             
-            string information = File.ReadAllText(moneyHelper2.FilePath);
-            moneyHelper2.SmsArray = Regex.Split(information, @"<sms protocol=");
+            string information = File.ReadAllText(MoneyHelper.FilePath);
+            MoneyHelper.SmsArray = Regex.Split(information, @"<sms protocol=");
         }
 
                
@@ -142,65 +142,65 @@ namespace iAboutMoney
             LoadActualBalance();
 
             string searchTime;
-            switch (moneyHelper2.Month)
+            switch (MoneyHelper.Month)
             {
                 case "January":
-                    searchTime = moneyHelper2.Year + ". jan. ";
+                    searchTime = MoneyHelper.Year + ". jan. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "February":
-                    searchTime = moneyHelper2.Year + ". febr. ";
+                    searchTime = MoneyHelper.Year + ". febr. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "March":
-                    searchTime = moneyHelper2.Year + ". márc. ";
+                    searchTime = MoneyHelper.Year + ". márc. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "April":
-                    searchTime = moneyHelper2.Year + ". ápr. ";
+                    searchTime = MoneyHelper.Year + ". ápr. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "May":
-                    searchTime = moneyHelper2.Year + ". máj. ";
+                    searchTime = MoneyHelper.Year + ". máj. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "June":
-                    searchTime = moneyHelper2.Year + ". jún. ";
+                    searchTime = MoneyHelper.Year + ". jún. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "July":
-                    searchTime = moneyHelper2.Year + ". júl. ";
+                    searchTime = MoneyHelper.Year + ". júl. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "August":
-                    searchTime = moneyHelper2.Year + ". aug. ";
+                    searchTime = MoneyHelper.Year + ". aug. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "September":
-                    searchTime = moneyHelper2.Year + ". szept. ";
+                    searchTime = MoneyHelper.Year + ". szept. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "October":
-                    searchTime = moneyHelper2.Year + ". okt. ";
+                    searchTime = MoneyHelper.Year + ". okt. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "November":
-                    searchTime = moneyHelper2.Year + ". nov. ";
+                    searchTime = MoneyHelper.Year + ". nov. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "December":
-                    searchTime = moneyHelper2.Year + ". dec. ";
+                    searchTime = MoneyHelper.Year + ". dec. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
@@ -216,7 +216,7 @@ namespace iAboutMoney
             List<int> monthlyIncomeList = new List<int>();
             int income;
            
-            foreach (var item in moneyHelper2.SmsArray)
+            foreach (var item in MoneyHelper.SmsArray)
             {
                 if (item.Contains(s))
                 {                   
@@ -226,19 +226,19 @@ namespace iAboutMoney
                     }
                     else
                     {                        
-                        string haviBevetel = moneyHelper2.GetBetween(item, "S:+", ",-HUF;");
+                        string haviBevetel = SmsFileWorker.GetBetween(item, "S:+", ",-HUF;");
                         string haviBevetelReplaced = haviBevetel.Replace(".", "");
                         if (int.TryParse(haviBevetelReplaced, out int intHaviBevetel))
                         {
                             monthlyIncomeList.Add(intHaviBevetel);
                         }
-                        string haviBevetel2 = moneyHelper2.GetBetween(item, "t: +", " HUF;");
+                        string haviBevetel2 = SmsFileWorker.GetBetween(item, "t: +", " HUF;");
                         string haviBevetelReplaced2 = haviBevetel2.Replace(".", "");
                         if (int.TryParse(haviBevetelReplaced2, out int intHaviBevetel2))
                         {
                             monthlyIncomeList.Add(intHaviBevetel2);
                         }
-                        string haviBevetel3 = moneyHelper2.GetBetween(item, ":+", ",-HUF; Közl");
+                        string haviBevetel3 = SmsFileWorker.GetBetween(item, ":+", ",-HUF; Közl");
                         string haviBevetelReplaced3 = haviBevetel3.Replace(".", "");
                         if (int.TryParse(haviBevetelReplaced3, out int intHaviBevetel3))
                         {
@@ -262,7 +262,7 @@ namespace iAboutMoney
             List<int> monthlyCreditList = new List<int>();
             int credit;
 
-            foreach (var item in moneyHelper2.SmsArray)
+            foreach (var item in MoneyHelper.SmsArray)
             {
                 if (item.Contains(s))
                 {
@@ -272,7 +272,7 @@ namespace iAboutMoney
                     }
                     else if (item.Contains("TÖRLESZTÉS") || item.Contains("khitel Központ Zrt."))
                     {                        
-                        string haviTorlesztes = moneyHelper2.GetBetween(item, "S:-", ",-HUF");
+                        string haviTorlesztes = SmsFileWorker.GetBetween(item, "S:-", ",-HUF");
                         string dataTorlesztesReplaced = haviTorlesztes.Replace(".", "");
                         if (int.TryParse(dataTorlesztesReplaced, out int intHaviTorlesztes))
                         {
@@ -289,7 +289,7 @@ namespace iAboutMoney
             List<int> otherExpenseList = new List<int>();
             int otherExpense;
 
-            foreach (var item in moneyHelper2.SmsArray)
+            foreach (var item in MoneyHelper.SmsArray)
             {
                 if (item.Contains(s))
                 {
@@ -301,13 +301,13 @@ namespace iAboutMoney
                     else if (item.Contains("ATM") || item.Contains("s/z") || item.Contains("rty") && item.Contains("s v") || item.Contains("NAPKÖZBENI")
                           || item.Contains("BIZTOSIT") || item.Contains("VAL KAPCS. DIJ") || item.Contains("TUTAL"))
                          {                        
-                            string haviEgyebKiadas = moneyHelper2.GetBetween(item, ": -", " HUF;");
+                            string haviEgyebKiadas = SmsFileWorker.GetBetween(item, ": -", " HUF;");
                              string haviEgyebKiadasReplaced = haviEgyebKiadas.Replace(".", "");
                             if (int.TryParse(haviEgyebKiadasReplaced, out int intHaviEgyebKiadas))
                             {
                                 otherExpenseList.Add(intHaviEgyebKiadas);
                             }
-                            string haviEgyebKiadas2 = moneyHelper2.GetBetween(item, ":-", ",-HUF;");
+                            string haviEgyebKiadas2 = SmsFileWorker.GetBetween(item, ":-", ",-HUF;");
                             string haviEgyebKiadasReplaced2 = haviEgyebKiadas2.Replace(".", "");
                             if (int.TryParse(haviEgyebKiadasReplaced2, out int intHaviEgyebKiadas2))
                             {
@@ -330,7 +330,7 @@ namespace iAboutMoney
             int monthlyFuelingAuchanStorno;
             int realTankolasAuchan;
 
-            foreach (var item in moneyHelper2.SmsArray)
+            foreach (var item in MoneyHelper.SmsArray)
             {
                 if (item.Contains(s))
                 {
@@ -342,13 +342,13 @@ namespace iAboutMoney
                     else if (item.Contains("SHELL TÖLTÖ") || item.Contains("MOL TÖLTÖ") ||
                         item.Contains("GP T") || item.Contains("; OMV"))
                     {                        
-                         string haviTankolas = moneyHelper2.GetBetween(item, ": -", " HUF;");
+                         string haviTankolas = SmsFileWorker.GetBetween(item, ": -", " HUF;");
                          string haviTankolasReplaced = haviTankolas.Replace(".", "");
                          if (int.TryParse(haviTankolasReplaced, out int intHaviTankolas))
                          {
                             monthlyFuelingList.Add(intHaviTankolas);
                          }
-                         string haviTankolas2 = moneyHelper2.GetBetween(item, ":-", ",-HUF;");
+                         string haviTankolas2 = SmsFileWorker.GetBetween(item, ":-", ",-HUF;");
                          string haviTankolasReplaced2 = haviTankolas2.Replace(".", "");
                          if (int.TryParse(haviTankolasReplaced2, out int intHaviTankolas2))
                          {
@@ -358,13 +358,13 @@ namespace iAboutMoney
                     //Fueling Auchan
                     else if (item.Contains("AUCHAN AUTBEN") && !item.Contains("STORNO"))
                     {
-                        string haviTankolasAuchan = moneyHelper2.GetBetween(item, ": -", " HUF;");
+                        string haviTankolasAuchan = SmsFileWorker.GetBetween(item, ": -", " HUF;");
                         string haviTankolasAuchanReplaced = haviTankolasAuchan.Replace(".", "");
                         if (int.TryParse(haviTankolasAuchanReplaced, out int intHaviTankolasAuchan))
                         {
                             monthlyFuelingListAuchan.Add(intHaviTankolasAuchan);
                         }
-                        string haviTankolasAuchan2 = moneyHelper2.GetBetween(item, ":-", ",-HUF;");
+                        string haviTankolasAuchan2 = SmsFileWorker.GetBetween(item, ":-", ",-HUF;");
                         string haviTankolasAuchanReplaced2 = haviTankolasAuchan2.Replace(".", "");
                         if (int.TryParse(haviTankolasAuchanReplaced2, out int intHaviTankolasAuchan2))
                         {
@@ -373,7 +373,7 @@ namespace iAboutMoney
                     }
                     else if (item.Contains("AUCHAN AUTBEN") && item.Contains("STORNO"))
                     {
-                        string haviTankolasStorno = moneyHelper2.GetBetween(item, "O: +", " HUF;");
+                        string haviTankolasStorno = SmsFileWorker.GetBetween(item, "O: +", " HUF;");
                         string haviTankolasStornoReplaced = haviTankolasStorno.Replace(".", "");
                         if (int.TryParse(haviTankolasStornoReplaced, out int intHaviTankolasStorno))
                         {
@@ -399,16 +399,16 @@ namespace iAboutMoney
         {
             List<int> actualBalanceList = new List<int>();
 
-            foreach (var item in moneyHelper2.SmsArray)
+            foreach (var item in MoneyHelper.SmsArray)
             {
-                string dataEgy = moneyHelper2.GetBetween(item, "Egy:+", ",-HUF");
+                string dataEgy = SmsFileWorker.GetBetween(item, "Egy:+", ",-HUF");
                 string dataEgy2 = dataEgy.Replace(".", "");
                 if (int.TryParse(dataEgy2, out int egyenlegEgy))
                 {
                     actualBalanceList.Add(egyenlegEgy);
                 }
 
-                string dataEgyenleg = moneyHelper2.GetBetween(item, "Egyenleg: +", " HUF");
+                string dataEgyenleg = SmsFileWorker.GetBetween(item, "Egyenleg: +", " HUF");
                 string dataEgyenleg2 = dataEgyenleg.Replace(".", "");
                 if (int.TryParse(dataEgyenleg2, out int egyenlegEgyenleg))
                 {
@@ -643,12 +643,12 @@ namespace iAboutMoney
         /// <param name="e"></param>
         private void Year_Click(object sender, EventArgs e)
         {
-            labelMonth.Text = moneyHelper2.Year.ToString();
+            labelMonth.Text = MoneyHelper.Year.ToString();
 
-            YearlyIncomeFromDatab(moneyHelper2.Year);
-            YearlyExpenseFromDatab(moneyHelper2.Year);
-            YearlyCreditFromDatab(moneyHelper2.Year);
-            YearlyFuelingFromDatab(moneyHelper2.Year);
+            YearlyIncomeFromDatab(MoneyHelper.Year);
+            YearlyExpenseFromDatab(MoneyHelper.Year);
+            YearlyCreditFromDatab(MoneyHelper.Year);
+            YearlyFuelingFromDatab(MoneyHelper.Year);
 
             LoadSum();
         }
@@ -698,7 +698,7 @@ namespace iAboutMoney
             {                
                 case "February":
                     labelMonth.Text = "January";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -717,7 +717,7 @@ namespace iAboutMoney
                     break;
                 case "March":
                     labelMonth.Text = "February";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -736,7 +736,7 @@ namespace iAboutMoney
                     break;
                 case "April":
                     labelMonth.Text = "March";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -755,7 +755,7 @@ namespace iAboutMoney
                     break;
                 case "May":
                     labelMonth.Text = "April";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -774,7 +774,7 @@ namespace iAboutMoney
                     break;
                 case "June":
                     labelMonth.Text = "May";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -793,7 +793,7 @@ namespace iAboutMoney
                     break;
                 case "July":
                     labelMonth.Text = "June";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -812,7 +812,7 @@ namespace iAboutMoney
                     break;
                 case "August":
                     labelMonth.Text = "July";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -831,7 +831,7 @@ namespace iAboutMoney
                     break;
                 case "September":
                     labelMonth.Text = "August";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -850,7 +850,7 @@ namespace iAboutMoney
                     break;
                 case "October":
                     labelMonth.Text = "September";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -869,7 +869,7 @@ namespace iAboutMoney
                     break;
                 case "November":
                     labelMonth.Text = "October";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -888,7 +888,7 @@ namespace iAboutMoney
                     break;
                 case "December":
                     labelMonth.Text = "November";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -939,7 +939,7 @@ namespace iAboutMoney
             {
                 case "January":
                     labelMonth.Text = "February";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -958,7 +958,7 @@ namespace iAboutMoney
                     break;
                 case "February":
                     labelMonth.Text = "March";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -977,7 +977,7 @@ namespace iAboutMoney
                     break;
                 case "March":
                     labelMonth.Text = "April";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -996,7 +996,7 @@ namespace iAboutMoney
                     break;
                 case "April":
                     labelMonth.Text = "May";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -1015,7 +1015,7 @@ namespace iAboutMoney
                     break;
                 case "May":
                     labelMonth.Text = "June";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -1034,7 +1034,7 @@ namespace iAboutMoney
                     break;
                 case "June":
                     labelMonth.Text = "July";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -1053,7 +1053,7 @@ namespace iAboutMoney
                     break;
                 case "July":
                     labelMonth.Text = "August";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -1072,7 +1072,7 @@ namespace iAboutMoney
                     break;
                 case "August":
                     labelMonth.Text = "September";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -1091,7 +1091,7 @@ namespace iAboutMoney
                     break;
                 case "September":
                     labelMonth.Text = "October";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -1110,7 +1110,7 @@ namespace iAboutMoney
                     break;
                 case "October":
                     labelMonth.Text = "November";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -1129,7 +1129,7 @@ namespace iAboutMoney
                     break;
                 case "November":
                     labelMonth.Text = "December";
-                    if (labelMonth.Text == moneyHelper2.Month)
+                    if (labelMonth.Text == MoneyHelper.Month)
                     {
                         LoadDataFromFile();
                         LoadMonthData();
@@ -1158,9 +1158,9 @@ namespace iAboutMoney
         /// </summary>
         private void ReadSavingTime()
         {
-            if (File.Exists(moneyHelper2.SavingTimeFilePath))
+            if (File.Exists(MoneyHelper.SavingTimeFilePath))
             {
-                moneyHelper2.SavedMonthList = File.ReadAllLines(moneyHelper2.SavingTimeFilePath).ToList();
+                MoneyHelper.SavedMonthList = File.ReadAllLines(MoneyHelper.SavingTimeFilePath).ToList();
             }
         }
 
@@ -1172,15 +1172,15 @@ namespace iAboutMoney
         {
             ReadSavingTime();            
             
-            foreach (var item in moneyHelper2.SavedMonthList)
+            foreach (var item in MoneyHelper.SavedMonthList)
             {
-                if (item == moneyHelper2.Month)
+                if (item == MoneyHelper.Month)
                 {
-                    moneyHelper2.Saved = true;
+                    MoneyHelper.Saved = true;
                 }
             }
 
-            if (moneyHelper2.Saved == false)
+            if (MoneyHelper.Saved == false)
             {
                 LoadSavingData();
             }
@@ -1194,66 +1194,66 @@ namespace iAboutMoney
         {
             string searchString;
 
-            switch (moneyHelper2.Month)
+            switch (MoneyHelper.Month)
             {
                 case "January":
                     searchString = ". dec. ";
-                    SaveToDatabase(moneyHelper2.Year-1, searchString, "December");
+                    SaveToDatabase(MoneyHelper.Year-1, searchString, "December");
                     WriteSavingTimeToFile();
                     break;
                 case "February":
                     searchString = ". jan. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "January");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "January");
                     WriteSavingTimeToFile();
                     break;
                 case "March":
                     searchString = ". febr. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "February");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "February");
                     WriteSavingTimeToFile();
                     break;
                 case "April":
                     searchString = ". márc. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "March");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "March");
                     WriteSavingTimeToFile();
                     break;
                 case "May":
                     searchString = ". ápr. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "April");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "April");
                     WriteSavingTimeToFile();
                     break;
                 case "June":
                     searchString = ". máj. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "May");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "May");
                     WriteSavingTimeToFile();
                     break;
                 case "July":
                     searchString = ". jún. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "Juny");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "Juny");
                     WriteSavingTimeToFile();
                     break;
                 case "August":
                     searchString = ". júl. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "July");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "July");
                     WriteSavingTimeToFile();
                     break;
                 case "September":
                     searchString = ". aug. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "August");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "August");
                     WriteSavingTimeToFile();
                     break;
                 case "October":
                     searchString = ". szept. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "September");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "September");
                     WriteSavingTimeToFile();
                     break;
                 case "November":
                     searchString = ". okt. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "October");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "October");
                     WriteSavingTimeToFile();
                     break;
                 case "December":
                     searchString = ". nov. ";
-                    SaveToDatabase(moneyHelper2.Year, searchString, "November");
+                    SaveToDatabase(MoneyHelper.Year, searchString, "November");
                     WriteSavingTimeToFile();
                     break;
             }
@@ -1271,9 +1271,9 @@ namespace iAboutMoney
             int intSaveIncome;
 
             //Income
-            foreach (var item in moneyHelper2.SmsArray)
+            foreach (var item in MoneyHelper.SmsArray)
             {
-                if (item.Contains(year+month))
+                if (item.Contains(year + month))
                 {
                     if (item.Contains("SIKERTELEN") || item.Contains("STORNO"))
                     {
@@ -1281,19 +1281,19 @@ namespace iAboutMoney
                     }
                     else
                     {                        
-                        string haviBevetel = moneyHelper2.GetBetween(item, "S:+", ",-HUF;");
+                        string haviBevetel = SmsFileWorker.GetBetween(item, "S:+", ",-HUF;");
                         string haviBevetelReplaced = haviBevetel.Replace(".", "");
                         if (int.TryParse(haviBevetelReplaced, out int intHaviBevetel))
                         {
                             monthlySaveIncomeList.Add(intHaviBevetel);
                         }
-                        string haviBevetel2 = moneyHelper2.GetBetween(item, "t: +", " HUF;");
+                        string haviBevetel2 = SmsFileWorker.GetBetween(item, "t: +", " HUF;");
                         string haviBevetelReplaced2 = haviBevetel2.Replace(".", "");
                         if (int.TryParse(haviBevetelReplaced2, out int intHaviBevetel2))
                         {
                             monthlySaveIncomeList.Add(intHaviBevetel2);
                         }
-                        string haviBevetel3 = moneyHelper2.GetBetween(item, ":+", ",-HUF; Közl");
+                        string haviBevetel3 = SmsFileWorker.GetBetween(item, ":+", ",-HUF; Közl");
                         string haviBevetelReplaced3 = haviBevetel3.Replace(".", "");
                         if (int.TryParse(haviBevetelReplaced3, out int intHaviBevetel3))
                         {
@@ -1308,7 +1308,7 @@ namespace iAboutMoney
             con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
             con.Open();
             cmd = new SqlCommand("INSERT INTO MoneyInfoTable (Year, Month, Money, Type) VALUES (@Year, @Month, @Money, @Type)", con);
-            cmd.Parameters.AddWithValue("@Year", moneyHelper2.Year);
+            cmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
             cmd.Parameters.AddWithValue("@Month", monthToDatabase);
             cmd.Parameters.AddWithValue("@Money", intSaveIncome);
             cmd.Parameters.AddWithValue("@Type", "Income");
@@ -1318,7 +1318,7 @@ namespace iAboutMoney
             //Credit
             List<int> monthlySaveCreditList = new List<int>();
 
-            foreach (var item in moneyHelper2.SmsArray)
+            foreach (var item in MoneyHelper.SmsArray)
             {
                 if (item.Contains(year + month))
                 {
@@ -1328,7 +1328,7 @@ namespace iAboutMoney
                     }
                     else if (item.Contains("TÖRLESZTÉS") || item.Contains("khitel Központ Zrt."))
                     {
-                        string haviTorlesztes = moneyHelper2.GetBetween(item, "S:-", ",-HUF");
+                        string haviTorlesztes = SmsFileWorker.GetBetween(item, "S:-", ",-HUF");
                         string dataTorlesztesReplaced = haviTorlesztes.Replace(".", "");
                         if (int.TryParse(dataTorlesztesReplaced, out int intHaviTorlesztes))
                         {
@@ -1343,7 +1343,7 @@ namespace iAboutMoney
                 con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
                 con.Open();
                 cmd = new SqlCommand("INSERT INTO MoneyInfoTable (Year, Month, Money, Type) VALUES (@Year, @Month, @Money, @Type)", con);
-                cmd.Parameters.AddWithValue("@Year", moneyHelper2.Year);
+                cmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
                 cmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 cmd.Parameters.AddWithValue("@Money", item);
                 cmd.Parameters.AddWithValue("@Type", "Credit");
@@ -1354,7 +1354,7 @@ namespace iAboutMoney
             //Expense
             List<int> monthlySaveExpenseList = new List<int>();
 
-            foreach (var item in moneyHelper2.SmsArray)
+            foreach (var item in MoneyHelper.SmsArray)
             {
                 if (item.Contains(year + month))
                 {
@@ -1366,13 +1366,13 @@ namespace iAboutMoney
                else if (item.Contains("ATM") || item.Contains("s/z") || item.Contains("rty") && item.Contains("s v") || item.Contains("NAPKÖZBENI")
                           || item.Contains("BIZTOSIT") || item.Contains("VAL KAPCS. DIJ") || item.Contains("TUTAL"))
                     {
-                        string haviEgyebKiadas = moneyHelper2.GetBetween(item, ": -", " HUF;");
+                        string haviEgyebKiadas = SmsFileWorker.GetBetween(item, ": -", " HUF;");
                         string haviEgyebKiadasReplaced = haviEgyebKiadas.Replace(".", "");
                         if (int.TryParse(haviEgyebKiadasReplaced, out int intHaviEgyebKiadas))
                         {
                             monthlySaveExpenseList.Add(intHaviEgyebKiadas);
                         }
-                        string haviEgyebKiadas2 = moneyHelper2.GetBetween(item, ":-", ",-HUF;");
+                        string haviEgyebKiadas2 = SmsFileWorker.GetBetween(item, ":-", ",-HUF;");
                         string haviEgyebKiadasReplaced2 = haviEgyebKiadas2.Replace(".", "");
                         if (int.TryParse(haviEgyebKiadasReplaced2, out int intHaviEgyebKiadas2))
                         {
@@ -1387,7 +1387,7 @@ namespace iAboutMoney
                 con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
                 con.Open();
                 cmd = new SqlCommand("INSERT INTO MoneyInfoTable (Year, Month, Money, Type) VALUES (@Year, @Month, @Money, @Type)", con);
-                cmd.Parameters.AddWithValue("@Year", moneyHelper2.Year);
+                cmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
                 cmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 cmd.Parameters.AddWithValue("@Money", item);
                 cmd.Parameters.AddWithValue("@Type", "Expense");
@@ -1403,7 +1403,7 @@ namespace iAboutMoney
             int intSaveFuelingAuchanStorno;
             int intRealFuelingAuchan;
 
-            foreach (var item in moneyHelper2.SmsArray)
+            foreach (var item in MoneyHelper.SmsArray)
             {
                 if (item.Contains(year + month))
                 {
@@ -1414,13 +1414,13 @@ namespace iAboutMoney
                else if (item.Contains("SHELL TÖLTÖ") || item.Contains("MOL TÖLTÖ") ||
                         item.Contains("GP T") || item.Contains("; OMV"))
                     {
-                        string haviTankolas = moneyHelper2.GetBetween(item, ": -", " HUF;");
+                        string haviTankolas = SmsFileWorker.GetBetween(item, ": -", " HUF;");
                         string haviTankolasReplaced = haviTankolas.Replace(".", "");
                         if (int.TryParse(haviTankolasReplaced, out int intHaviTankolas))
                         {
                             monthlySaveFuelingList.Add(intHaviTankolas);
                         }
-                        string haviTankolas2 = moneyHelper2.GetBetween(item, ":-", ",-HUF;");
+                        string haviTankolas2 = SmsFileWorker.GetBetween(item, ":-", ",-HUF;");
                         string haviTankolasReplaced2 = haviTankolas2.Replace(".", "");
                         if (int.TryParse(haviTankolasReplaced2, out int intHaviTankolas2))
                         {
@@ -1431,13 +1431,13 @@ namespace iAboutMoney
                     //Auchan
                     else if (item.Contains("AUCHAN AUTBEN") && !item.Contains("STORNO"))
                     {
-                        string haviTankolasAuchan = moneyHelper2.GetBetween(item, ": -", " HUF;");
+                        string haviTankolasAuchan = SmsFileWorker.GetBetween(item, ": -", " HUF;");
                         string haviTankolasAuchanReplaced = haviTankolasAuchan.Replace(".", "");
                         if (int.TryParse(haviTankolasAuchanReplaced, out int intHaviTankolasAuchan))
                         {
                             monthlySaveFuelingAuchanList.Add(intHaviTankolasAuchan);
                         }
-                        string haviTankolas2 = moneyHelper2.GetBetween(item, ":-", ",-HUF;");
+                        string haviTankolas2 = SmsFileWorker.GetBetween(item, ":-", ",-HUF;");
                         string haviTankolasReplaced2 = haviTankolas2.Replace(".", "");
                         if (int.TryParse(haviTankolasReplaced2, out int intHaviTankolas2))
                         {
@@ -1446,7 +1446,7 @@ namespace iAboutMoney
                     }
                     else if (item.Contains("AUCHAN AUTBEN") && item.Contains("STORNO"))
                     {
-                        string haviTankolasStorno = moneyHelper2.GetBetween(item, "O: +", " HUF;");
+                        string haviTankolasStorno = SmsFileWorker.GetBetween(item, "O: +", " HUF;");
                         string haviTankolasStornoReplaced = haviTankolasStorno.Replace(".", "");
                         if (int.TryParse(haviTankolasStornoReplaced, out int intHaviTankolasStorno))
                         {
@@ -1466,7 +1466,7 @@ namespace iAboutMoney
                 con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
                 con.Open();
                 cmd = new SqlCommand("INSERT INTO MoneyInfoTable (Year, Month, Money, Type) VALUES (@Year, @Month, @Money, @Type)", con);
-                cmd.Parameters.AddWithValue("@Year", moneyHelper2.Year);
+                cmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
                 cmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 cmd.Parameters.AddWithValue("@Money", item);
                 cmd.Parameters.AddWithValue("@Type", "Fueling");
@@ -1480,11 +1480,11 @@ namespace iAboutMoney
         /// </summary>
         private void WriteSavingTimeToFile()
         {
-            using (FileStream stream = new FileStream(moneyHelper2.SavingTimeFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+            using (FileStream stream = new FileStream(MoneyHelper.SavingTimeFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
-                    writer.WriteLine(moneyHelper2.Month);
+                    writer.WriteLine(MoneyHelper.Month);
                 }
             }
         }
@@ -1507,7 +1507,7 @@ namespace iAboutMoney
             DownloadFinishLabel.Visible = true;
             LoadDataFromFile();
             LoadMonthData();
-            LoadSum();
+            LoadSum();            
         }
 
 

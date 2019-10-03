@@ -17,6 +17,8 @@ namespace iAboutMoney
 {
     public partial class Form1 : Form
     {
+        //TODO: Refactoring 
+        //TODO: Create automatic 1/4, 1/2 annual reports 
         public Form1()
         {
             InitializeComponent();
@@ -112,143 +114,103 @@ namespace iAboutMoney
             }
 
             string information = File.ReadAllText(moneyHelper.FilePath);
-            moneyHelper.SmsArray = Regex.Split(information, @"<sms protocol=");
+            MoneyHelper.SmsArray = Regex.Split(information, @"<sms protocol=");
         }
 
 
 
 
-        /// <summary>
-        /// Foreach in smsArray for Balances in Chart
-        /// </summary>
-        /// <param name="date">Look for which month</param>
-        /// <param name="list">Add balances to list</param>
-        public void LoadBalancesForChart(string date, List<int> list)
-        {
-
-            foreach (var item in moneyHelper.SmsArray)
-            {
-                if (item.Contains(date))
-                {
-                    string dataEgy = moneyHelper.GetBetween(item, "Egy:+", ",-HUF");
-                    string dataEgy2 = dataEgy.Replace(".", "");
-                    if (int.TryParse(dataEgy2, out int egyenlegEgy))
-                    {
-                        list.Add(egyenlegEgy);
-                    }
-
-                    string dataEgyenleg = moneyHelper.GetBetween(item, "Egyenleg: +", " HUF");
-                    string dataEgyenleg2 = dataEgyenleg.Replace(".", "");
-                    if (int.TryParse(dataEgyenleg2, out int egyenlegEgyenleg))
-                    {
-                        list.Add(egyenlegEgyenleg);
-                    }
-                }
-            }
-        }
-
+        
         /// <summary>
         /// Drawing the actual year Chart
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void Chart_Paint(object sender, PaintEventArgs e)
         {
-            List<int> balanceList = new List<int>();            
-
             Graphics graphics = e.Graphics;
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             Pen pen = new Pen(Color.Green, 2);
             Pen pen2 = new Pen(Color.Gray, 0.1F);
-           
+
+            List<int> balanceList = new List<int>();
 
             try
             {
                 graphics.DrawLine(pen2, 12, 201, 166, 146);
 
                 //January
-                LoadBalancesForChart(moneyHelper.Year + ". jan. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". jan. ", balanceList);
                 int janB = balanceList.Last();
                 //February
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". febr. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". febr. ", balanceList);
                 int febrB = balanceList.Last();
-                int resPointFebrY = ((febrB - janB) / 10000) / 2;
-                int febrY = 201 - resPointFebrY;
-                graphics.DrawLine(pen, 12, 201, 26, febrY);
+                int[] points = SmsFileWorker.GetTheTwoChartPoints(janB, febrB, 201);
+                graphics.DrawLine(pen, 12, 201, 26, points[1]);
                 //March  
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". márc. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". márc. ", balanceList);
                 int marchB = balanceList.Last();
-                int resPointMarchY = ((marchB - febrB) / 10000) / 2;
-                int marchY = febrY - resPointMarchY;
-                graphics.DrawLine(pen, 26, febrY, 40, marchY);
+                points = SmsFileWorker.GetTheTwoChartPoints( febrB, marchB, points[1]);
+                graphics.DrawLine(pen, 26, points[0], 40, points[1]);
                 //April
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". ápr. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". ápr. ", balanceList);
                 int aprilB = balanceList.Last();
-                int resPointAprilY = ((aprilB - marchB) / 10000) / 2;
-                int aprilY = marchY - resPointAprilY;
-                graphics.DrawLine(pen, 40, marchY, 54, aprilY);
+                points= SmsFileWorker.GetTheTwoChartPoints( marchB, aprilB, points[1]);
+                graphics.DrawLine(pen, 40, points[0], 54, points[1]);
                 //May
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". máj. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". máj. ", balanceList);
                 int mayB = balanceList.Last();
-                int resPointMayY = ((mayB - aprilB) / 10000) / 2;
-                int mayY = aprilY - resPointMayY;
-                graphics.DrawLine(pen, 54, aprilY, 68, mayY);
+                points= SmsFileWorker.GetTheTwoChartPoints( aprilB, mayB, points[1]);
+                graphics.DrawLine(pen, 54, points[0], 68, points[1]);
                 //June
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". jún. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". jún. ", balanceList);
                 int juneB = balanceList.Last();
-                int resPointJuneY = ((juneB - mayB) / 10000) / 2;
-                int juneY = mayY - resPointJuneY;
-                graphics.DrawLine(pen, 68, mayY, 82, juneY);
+                points = SmsFileWorker.GetTheTwoChartPoints( mayB, juneB, points[1]);
+                graphics.DrawLine(pen, 68, points[0], 82, points[1]);
                 //July
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". júl. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". júl. ", balanceList);
                 int julyB = balanceList.Last();
-                int resPointJulyY = ((julyB - juneB) / 10000) / 2;
-                int julyY = juneY - resPointJulyY;
-                graphics.DrawLine(pen, 82, juneY, 96, julyY);
+                points = SmsFileWorker.GetTheTwoChartPoints( juneB, julyB, points[1]);
+                graphics.DrawLine(pen, 82, points[0], 96, points[1]);
                 //August
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". aug. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". aug. ", balanceList);
                 int augustB = balanceList.Last();
-                int resPointAugustY = ((augustB - julyB) / 10000) / 2;
-                int augustY = julyY - resPointAugustY;
-                graphics.DrawLine(pen, 96, julyY, 110, augustY);
+                points = SmsFileWorker.GetTheTwoChartPoints( julyB, augustB, points[1]);
+                graphics.DrawLine(pen, 96, points[0], 110, points[1]);
                 //September
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". szept. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". szept. ", balanceList);
                 int septemberB = balanceList.Last();
-                int resPointSeptemberY = ((septemberB - augustB) / 10000) / 2;
-                int septemberY = augustY - resPointSeptemberY;
-                graphics.DrawLine(pen, 110, augustY, 124, septemberY);
+                points = SmsFileWorker.GetTheTwoChartPoints( augustB, septemberB, points[1]);
+                graphics.DrawLine(pen, 110, points[0], 124, points[1]);
                 //October 
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". okt. ", balanceList);
-                int octoberB = balanceList.Last();                
-                int resPointoctoberY = (octoberB - septemberB) / 10000;
-                int octoberY = septemberY - resPointoctoberY;
-                graphics.DrawLine(pen, 124, septemberY, 138, octoberY);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". okt. ", balanceList);
+                int octoberB = balanceList.Last();
+                points = SmsFileWorker.GetTheTwoChartPoints( septemberB, octoberB, points[1]);
+                graphics.DrawLine(pen, 124, points[0], 138, points[1]);
                 //November
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". nov. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". nov. ", balanceList);
                 int novemberB = balanceList.Last();
-                int resPointNovemberY = (novemberB - octoberB) / 10000;
-                int novemberY = octoberY - resPointNovemberY;
-                graphics.DrawLine(pen, 124, octoberY, 138, novemberY);
+                points = SmsFileWorker.GetTheTwoChartPoints( octoberB, novemberB, points[1]);
+                graphics.DrawLine(pen, 124, points[0], 138, points[1]);
                 //December
                 balanceList.Clear();
-                LoadBalancesForChart(moneyHelper.Year + ". dec. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(moneyHelper.Year + ". dec. ", balanceList);
                 int decemberB = balanceList.Last();
-                int resPointDecemberY = (decemberB - novemberB) / 10000;
-                int decemberY = novemberY - resPointDecemberY;
-                graphics.DrawLine(pen, 124, novemberY, 138, decemberY);
+                points = SmsFileWorker.GetTheTwoChartPoints( novemberB, decemberB, points[1]);
+                graphics.DrawLine(pen, 124, points[0], 138, points[1]);
             }
             catch (Exception) { }
-
+            
             graphics.Dispose();
         }
 
@@ -278,6 +240,7 @@ namespace iAboutMoney
         {
             Application.Exit();
         }
+
     }
 
 }

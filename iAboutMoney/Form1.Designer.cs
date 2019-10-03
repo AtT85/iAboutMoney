@@ -40,7 +40,7 @@
             this.Exit = new System.Windows.Forms.PictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.refreshChart = new System.Windows.Forms.Label();
             this.bunifuSeparator3 = new Bunifu.Framework.UI.BunifuSeparator();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -122,10 +122,10 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
-            // label2
+            // refreshChart
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.refreshChart, "refreshChart");
+            this.refreshChart.Name = "refreshChart";
             // 
             // bunifuSeparator3
             // 
@@ -148,7 +148,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.bunifuSeparator3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.refreshChart);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bunifuSeparator2);
             this.Controls.Add(this.bunifuSeparator1);
@@ -163,7 +163,7 @@
             this.Opacity = 0.9D;
             this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Chart_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Exit)).EndInit();
             this.ResumeLayout(false);
@@ -182,7 +182,7 @@
         private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator2;
         private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label refreshChart;
         private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator3;
         private System.Windows.Forms.Label label3;
     }

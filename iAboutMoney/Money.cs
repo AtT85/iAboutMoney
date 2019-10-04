@@ -38,11 +38,12 @@ namespace iAboutMoney
 
 
         private void Form2_Load(object sender, EventArgs e)
-        {
+        {            
             labelMonth.Text = MoneyHelper.Month;
+            labelBalanceActual.Text = LoadActualBalance().ToString("C0");
             moneyHelper.LoadDatasFromFile();
-            LoadActualBalance();
             LoadMonthData();
+
             LoadSum();            
         } 
 
@@ -306,7 +307,7 @@ namespace iAboutMoney
         /// <summary>
         /// Set Balance label with SmsArray
         /// </summary>
-        private void LoadActualBalance()
+        private int LoadActualBalance()
         {
             List<int> actualBalanceList = new List<int>();
 
@@ -328,7 +329,8 @@ namespace iAboutMoney
             }
 
             int intActualBalance = actualBalanceList.Last();
-            labelBalanceActual.Text = intActualBalance.ToString("C0");
+
+            return intActualBalance;
         }
 
         /// <summary>
@@ -1035,12 +1037,14 @@ namespace iAboutMoney
             {
                 if (item == MoneyHelper.Month)
                 {
-                    moneyHelper.Saved = true;
+                    moneyHelper.Saved = true;                    
                 }
             }
 
             if (moneyHelper.Saved == false)
             {
+                var task = Task.Run((Func<Task>)DropboxClass.Run);
+                task.Wait();
                 LoadSavingData();
             }
         }
@@ -1358,6 +1362,7 @@ namespace iAboutMoney
             DownloadFinishLabel.Visible = true;
             moneyHelper.LoadDatasFromFile();
             LoadMonthData();
+            labelBalanceActual.Text = LoadActualBalance().ToString("C0");
             LoadSum();            
         }
 

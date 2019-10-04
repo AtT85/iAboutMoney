@@ -220,7 +220,7 @@ namespace iAboutMoney
         {
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             form2.Location = new Point(screenWidth - 190, 50);
-
+            
             form2.Show();
         }
 

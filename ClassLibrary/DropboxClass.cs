@@ -51,6 +51,28 @@ namespace ClassLibrary
                     File.WriteAllBytes(RealFile, d);
                 }
             }
+
+            MoveFile();            
+        }
+
+        public static void MoveFile()
+        {
+            DirectoryInfo d = new DirectoryInfo(@"C:\Users\totha\Source\Repos\iAboutMoneyGit\iAboutMoney\bin\Debug");
+            FileInfo[] Files = d.GetFiles("*.xml");
+            foreach (var item in Files)
+            {
+                if (item.Name.Contains("sms-"))
+                {
+                    try
+                    {
+                        File.Move(item.Name, @"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Dropbox\" + item.Name);
+                    }
+                    catch (IOException)
+                    {
+                        File.Delete(item.Name);
+                    }
+                }
+            }
         }
     }
 }

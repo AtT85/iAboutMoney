@@ -23,13 +23,14 @@ namespace iAboutMoney
     public partial class Form2 : Form
     {
         MoneyHelper moneyHelper = new MoneyHelper();
+
         static DataContext dataContext = new DataContext(Database.ConnectionString);
         Table<MoneyInfoTable> moneyDb = dataContext.GetTable<MoneyInfoTable>();
 
-        SqlCommand sqlCmd;
-        SqlConnection sqlCon;
+        static SqlConnection sqlCon = new SqlConnection(Database.ConnectionString);
+        SqlCommand sqlCmd = new SqlCommand(Database.SqlComm, sqlCon);
 
-       
+
         public Form2()
         {
             InitializeComponent();
@@ -42,9 +43,7 @@ namespace iAboutMoney
             moneyHelper.LoadDatasFromFile();
             LoadActualBalance();
             LoadMonthData();
-            LoadSum();
-
-            
+            LoadSum();            
         } 
 
         
@@ -1018,9 +1017,9 @@ namespace iAboutMoney
         /// </summary>
         private void ReadSavingTime()
         {
-            if (File.Exists(moneyHelper.SavingTimeFilePath))
+            if (File.Exists(MoneyHelper.SavingTimeFilePath))
             {
-                moneyHelper.SavedMonthList = File.ReadAllLines(moneyHelper.SavingTimeFilePath).ToList();
+                moneyHelper.SavedMonthList = File.ReadAllLines(MoneyHelper.SavingTimeFilePath).ToList();
             }
         }
 
@@ -1165,9 +1164,7 @@ namespace iAboutMoney
 
             intSaveIncome = monthlySaveIncomeList.Sum();
 
-            sqlCon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
             sqlCon.Open();
-            sqlCmd = new SqlCommand("INSERT INTO MoneyInfoTable (Year, Month, Money, Type) VALUES (@Year, @Month, @Money, @Type)", sqlCon);
             sqlCmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
             sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
             sqlCmd.Parameters.AddWithValue("@Money", intSaveIncome);
@@ -1200,9 +1197,7 @@ namespace iAboutMoney
 
             foreach (var item in monthlySaveCreditList)
             {
-                sqlCon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
                 sqlCon.Open();
-                sqlCmd = new SqlCommand("INSERT INTO MoneyInfoTable (Year, Month, Money, Type) VALUES (@Year, @Month, @Money, @Type)", sqlCon);
                 sqlCmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
                 sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 sqlCmd.Parameters.AddWithValue("@Money", item);
@@ -1244,9 +1239,7 @@ namespace iAboutMoney
 
             foreach (var item in monthlySaveExpenseList)
             {
-                sqlCon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
                 sqlCon.Open();
-                sqlCmd = new SqlCommand("INSERT INTO MoneyInfoTable (Year, Month, Money, Type) VALUES (@Year, @Month, @Money, @Type)", sqlCon);
                 sqlCmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
                 sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 sqlCmd.Parameters.AddWithValue("@Money", item);
@@ -1323,9 +1316,7 @@ namespace iAboutMoney
 
             foreach (var item in monthlySaveFuelingList)
             {
-                sqlCon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\totha\Source\Repos\LibraryiAboutMoney\Database\MoneyInfoDatabase.mdf;Integrated Security=True");
                 sqlCon.Open();
-                sqlCmd = new SqlCommand("INSERT INTO MoneyInfoTable (Year, Month, Money, Type) VALUES (@Year, @Month, @Money, @Type)", sqlCon);
                 sqlCmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
                 sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 sqlCmd.Parameters.AddWithValue("@Money", item);
@@ -1340,7 +1331,7 @@ namespace iAboutMoney
         /// </summary>
         private void WriteSavingTimeToFile()
         {
-            using (FileStream stream = new FileStream(moneyHelper.SavingTimeFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+            using (FileStream stream = new FileStream(MoneyHelper.SavingTimeFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {

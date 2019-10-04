@@ -12,11 +12,10 @@ namespace ClassLibrary
         public static int Year { get; set; }
         public static string Month { get; set; }
         public bool Saved { get; set; }
-        public string SavingTimeFilePath { get; set; } = "savingTime.dat";
+        public static string SavingTimeFilePath { get; } = "savingTime.dat";
         public List<string> SavedMonthList { get; set; }
         public static string[] SmsArray { get; set; }
         public static string FilePath { get; set; }
-        public List<int> BalanceList { get; set; }
 
         public void SetDate()
         {

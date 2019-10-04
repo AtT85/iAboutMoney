@@ -22,7 +22,7 @@ namespace iAboutMoney
 {
     public partial class Form2 : Form
     {
-        MoneyHelper MoneyHelper = new MoneyHelper();        
+        MoneyHelper moneyHelper = new MoneyHelper();        
 
         SqlCommand cmd;
         SqlConnection con;
@@ -37,99 +37,17 @@ namespace iAboutMoney
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            SetDate();
-
-            LoadDataFromFile();
-
+            labelMonth.Text = MoneyHelper.Month;
+            moneyHelper.LoadDatasFromFile();
+            LoadActualBalance();
             LoadMonthData();
             LoadSum();
         }
 
 
-        /// <summary>
-        /// Set Year, Month and month label
-        /// </summary>
-        private void SetDate()
-        {
-            var dateAndTime = DateTime.Now;
-            MoneyHelper.Year = dateAndTime.Year;
+        
 
-            string tempMonth = dateAndTime.Month.ToString();
-            switch (tempMonth)
-            {
-                case "1":
-                    MoneyHelper.Month = "January";
-                    break;
-                case "2":
-                    MoneyHelper.Month = "February";
-                    break;
-                case "3":
-                    MoneyHelper.Month = "March";
-                    break;
-                case "4":
-                    MoneyHelper.Month = "April";
-                    break;
-                case "5":
-                    MoneyHelper.Month = "May";
-                    break;
-                case "6":
-                    MoneyHelper.Month = "June";
-                    break;
-                case "7":
-                    MoneyHelper.Month = "July";
-                    break;
-                case "8":
-                    MoneyHelper.Month = "August";
-                    break;
-                case "9":
-                    MoneyHelper.Month = "September";
-                    break;
-                case "10":
-                    MoneyHelper.Month = "October";
-                    break;
-                case "11":
-                    MoneyHelper.Month = "November";
-                    break;
-                case "12":
-                    MoneyHelper.Month = "December";
-                    break;
-            }
-
-            labelMonth.Text = MoneyHelper.Month.ToString();
-        }
-
-        /// <summary>
-        /// Move out sms file from main folder
-        /// Read the file to string, then to SmsArray /sms/
-        /// </summary>
-        public void LoadDataFromFile()
-        {
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\totha\Source\Repos\iAboutMoneyGit\iAboutMoney\bin\Debug");
-            FileInfo[] Files = d.GetFiles("*.xml");
-
-            foreach (var item in Files)
-            {
-                if (item.Name.Contains("sms-"))
-                {                    
-                    File.Move(item.Name, @"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Dropbox\" + item.Name);
-                }
-            }
-            
-            var files = Directory.GetFiles(@"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Dropbox", "*.xml");
-
-            foreach (var item in files)
-            {
-                if (item.Contains("sms-"))
-                {
-                    MoneyHelper.FilePath = item;
-                }
-            }
-            
-            string information = File.ReadAllText(MoneyHelper.FilePath);
-            MoneyHelper.SmsArray = Regex.Split(information, @"<sms protocol=");
-        }
-
-               
+        
 
 
         /// <summary>
@@ -139,8 +57,6 @@ namespace iAboutMoney
         /// </summary>
         private void LoadMonthData()
         {
-            LoadActualBalance();
-
             string searchTime;
             switch (MoneyHelper.Month)
             {
@@ -662,9 +578,8 @@ namespace iAboutMoney
         /// <param name="e"></param>
         private void Month_Click(object sender, EventArgs e)
         {
-            SetDate();
-
-            LoadDataFromFile();
+            labelMonth.Text = MoneyHelper.Month;
+            moneyHelper.LoadDatasFromFile();
             LoadMonthData();
             LoadSum();            
         }
@@ -679,8 +594,7 @@ namespace iAboutMoney
         /// <param name="e"></param>
         private void Prev_Click(object sender, EventArgs e)
         {
-            var dateAndTime = DateTime.Now;
-            int yearActual = dateAndTime.Year;
+            int yearActual = MoneyHelper.Year;
 
             if (int.TryParse(labelMonth.Text, out int year))
             {
@@ -700,7 +614,7 @@ namespace iAboutMoney
                     labelMonth.Text = "January";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -719,8 +633,8 @@ namespace iAboutMoney
                     labelMonth.Text = "February";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
-                        LoadMonthData();
+                        moneyHelper.LoadDatasFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadSum();
                     }
                     else
@@ -738,7 +652,7 @@ namespace iAboutMoney
                     labelMonth.Text = "March";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -757,7 +671,7 @@ namespace iAboutMoney
                     labelMonth.Text = "April";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -776,7 +690,7 @@ namespace iAboutMoney
                     labelMonth.Text = "May";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -795,7 +709,7 @@ namespace iAboutMoney
                     labelMonth.Text = "June";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -814,7 +728,7 @@ namespace iAboutMoney
                     labelMonth.Text = "July";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -833,7 +747,7 @@ namespace iAboutMoney
                     labelMonth.Text = "August";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -852,7 +766,7 @@ namespace iAboutMoney
                     labelMonth.Text = "September";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -871,7 +785,7 @@ namespace iAboutMoney
                     labelMonth.Text = "October";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -890,7 +804,7 @@ namespace iAboutMoney
                     labelMonth.Text = "November";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -918,8 +832,7 @@ namespace iAboutMoney
         /// <param name="e"></param>
         private void Next_Click(object sender, EventArgs e)
         {
-            var dateAndTime = DateTime.Now;
-            int yearActual = dateAndTime.Year;
+            int yearActual = MoneyHelper.Year;
 
             if (int.TryParse(labelMonth.Text, out int year))
             {
@@ -941,7 +854,7 @@ namespace iAboutMoney
                     labelMonth.Text = "February";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -960,7 +873,7 @@ namespace iAboutMoney
                     labelMonth.Text = "March";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -979,7 +892,7 @@ namespace iAboutMoney
                     labelMonth.Text = "April";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -998,7 +911,7 @@ namespace iAboutMoney
                     labelMonth.Text = "May";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -1017,7 +930,7 @@ namespace iAboutMoney
                     labelMonth.Text = "June";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -1036,8 +949,8 @@ namespace iAboutMoney
                     labelMonth.Text = "July";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
-                        LoadMonthData();
+                        moneyHelper.LoadDatasFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadSum();
                     }
                     else
@@ -1055,7 +968,7 @@ namespace iAboutMoney
                     labelMonth.Text = "August";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -1074,7 +987,7 @@ namespace iAboutMoney
                     labelMonth.Text = "September";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -1093,7 +1006,7 @@ namespace iAboutMoney
                     labelMonth.Text = "October";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -1112,7 +1025,7 @@ namespace iAboutMoney
                     labelMonth.Text = "November";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -1131,7 +1044,7 @@ namespace iAboutMoney
                     labelMonth.Text = "December";
                     if (labelMonth.Text == MoneyHelper.Month)
                     {
-                        LoadDataFromFile();
+                        moneyHelper.LoadDatasFromFile();
                         LoadMonthData();
                         LoadSum();
                     }
@@ -1158,9 +1071,9 @@ namespace iAboutMoney
         /// </summary>
         private void ReadSavingTime()
         {
-            if (File.Exists(MoneyHelper.SavingTimeFilePath))
+            if (File.Exists(moneyHelper.SavingTimeFilePath))
             {
-                MoneyHelper.SavedMonthList = File.ReadAllLines(MoneyHelper.SavingTimeFilePath).ToList();
+                moneyHelper.SavedMonthList = File.ReadAllLines(moneyHelper.SavingTimeFilePath).ToList();
             }
         }
 
@@ -1172,15 +1085,15 @@ namespace iAboutMoney
         {
             ReadSavingTime();            
             
-            foreach (var item in MoneyHelper.SavedMonthList)
+            foreach (var item in moneyHelper.SavedMonthList)
             {
                 if (item == MoneyHelper.Month)
                 {
-                    MoneyHelper.Saved = true;
+                    moneyHelper.Saved = true;
                 }
             }
 
-            if (MoneyHelper.Saved == false)
+            if (moneyHelper.Saved == false)
             {
                 LoadSavingData();
             }
@@ -1480,7 +1393,7 @@ namespace iAboutMoney
         /// </summary>
         private void WriteSavingTimeToFile()
         {
-            using (FileStream stream = new FileStream(MoneyHelper.SavingTimeFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+            using (FileStream stream = new FileStream(moneyHelper.SavingTimeFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
@@ -1505,7 +1418,7 @@ namespace iAboutMoney
             var task = Task.Run((Func<Task>)DropboxClass.Run);
             task.Wait();
             DownloadFinishLabel.Visible = true;
-            LoadDataFromFile();
+            moneyHelper.LoadDatasFromFile();
             LoadMonthData();
             LoadSum();            
         }

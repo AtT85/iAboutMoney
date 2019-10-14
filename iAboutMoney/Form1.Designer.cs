@@ -162,7 +162,7 @@
             this.Name = "Form1";
             this.Opacity = 0.9D;
             this.ShowInTaskbar = false;
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.Form1_LoadAsync);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Chart_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Exit)).EndInit();

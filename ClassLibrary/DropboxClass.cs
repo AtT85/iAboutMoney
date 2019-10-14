@@ -22,7 +22,10 @@ namespace ClassLibrary
             return Token;
         }
 
-        public static async Task Run()
+
+
+
+        public static async Task Download()
         {
             string RealFile = "";
             string folder = "/Apps/SMSBackupRestore/";
@@ -39,7 +42,6 @@ namespace ClassLibrary
                 }
             }
 
-
             using (var dbx = new DropboxClient(Token))
             {
                 using (var response = await dbx.Files.DownloadAsync(folder + RealFile))
@@ -52,10 +54,11 @@ namespace ClassLibrary
                 }
             }
 
-            MoveFile();            
         }
 
-        public static void MoveFile()
+
+
+        public static void MoveFileFromMainFolder()
         {
             DirectoryInfo d = new DirectoryInfo(@"C:\Users\totha\Source\Repos\iAboutMoneyGit\iAboutMoney\bin\Debug");
             FileInfo[] Files = d.GetFiles("*.xml");

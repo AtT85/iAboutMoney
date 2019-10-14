@@ -7,20 +7,20 @@ using System.Text.RegularExpressions;
 
 namespace ClassLibrary
 {
-    public class MoneyHelper
+    public class DateHelper
     {        
         public static int Year { get; set; }
         public static string Month { get; set; }
-        public bool Saved { get; set; }
+        public static int Day { get; set; }
         public static string SavingTimeFilePath { get; } = "savingTime.dat";
         public List<string> SavedMonthList { get; set; }
-        public static string[] SmsArray { get; set; }
-        public static string FilePath { get; set; }
+       
 
         public void SetDate()
         {
             var dateAndTime = DateTime.Now;
             Year = dateAndTime.Year;
+            Day = dateAndTime.Day;
 
             string tempMonth = dateAndTime.Month.ToString();
             switch (tempMonth)
@@ -62,28 +62,7 @@ namespace ClassLibrary
                     Month = "December";
                     break;
             }
-
-            //labelMonth.Text = MoneyHelper.Month.ToString();
-        }
-
-        public void LoadDatasFromFile()
-        {            
-            DropboxClass.MoveFile();
-            
-            var files = Directory.GetFiles(@"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Dropbox", "*.xml");
-            foreach (var item in files)
-            {
-                if (item.Contains("sms-"))
-                {
-                    FilePath = item;
-                }
-            }
-
-            string allSmsString = File.ReadAllText(FilePath);
-            SmsArray = Regex.Split(allSmsString, @"<sms protocol=");
-        }
-
-        
+        }      
 
     }
 }

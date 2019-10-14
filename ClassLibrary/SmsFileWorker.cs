@@ -24,11 +24,12 @@ namespace ClassLibrary
             return String.Empty;
         }
 
+
+
+
         public static List<int> LoadBalancesForChart(string date, List<int> list)
         {
-            
-
-            foreach (var item in MoneyHelper.SmsArray)
+            foreach (var item in WriteAndReadClass.SmsArray)
             {
                 if (item.Contains(date))
                 {
@@ -50,6 +51,8 @@ namespace ClassLibrary
             
             return list;
         }
+
+
 
         public static int[] GetTheTwoChartPoints( int lastbalance, int balance, int lastPointInChart)
         {           

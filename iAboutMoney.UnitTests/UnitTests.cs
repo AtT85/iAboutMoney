@@ -10,10 +10,10 @@ namespace iAboutMoney.UnitTests
         [TestMethod]
         public void Test_GetBetWeenMethod_Expect_100()
         {
-            var helper = new MoneyHelper();
+            
             string test = "xyzEgyenleg: +100 HUFxyzz";
 
-            string result = helper.GetBetween(test, "Egyenleg: +", " HUF");
+            string result = SmsFileWorker.GetBetween(test, "Egyenleg: +", " HUF");
 
             Assert.AreEqual("100", result);
         }

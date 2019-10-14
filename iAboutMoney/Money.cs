@@ -22,7 +22,7 @@ namespace iAboutMoney
 {
     public partial class Form2 : Form
     {
-        MoneyHelper moneyHelper = new MoneyHelper();
+        DateHelper dateHelper = new DateHelper();
 
         static DataContext dataContext = new DataContext(Database.ConnectionString);
         Table<MoneyInfoTable> moneyDb = dataContext.GetTable<MoneyInfoTable>();
@@ -39,9 +39,11 @@ namespace iAboutMoney
 
         private void Form2_Load(object sender, EventArgs e)
         {            
-            labelMonth.Text = MoneyHelper.Month;
+            labelMonth.Text = DateHelper.Month;
             labelBalanceActual.Text = LoadActualBalance().ToString("C0");
-            moneyHelper.LoadDatasFromFile();
+            WriteAndReadClass.LoadDatasFromFile();
+            DropboxClass.MoveFileFromMainFolder();
+
             LoadMonthData();
 
             LoadSum();            
@@ -54,65 +56,65 @@ namespace iAboutMoney
         private void LoadMonthData()
         {
             string searchTime;
-            switch (MoneyHelper.Month)
+            switch (DateHelper.Month)
             {
                 case "January":
-                    searchTime = MoneyHelper.Year + ". jan. ";
+                    searchTime = DateHelper.Year + ". jan. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "February":
-                    searchTime = MoneyHelper.Year + ". febr. ";
+                    searchTime = DateHelper.Year + ". febr. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "March":
-                    searchTime = MoneyHelper.Year + ". márc. ";
+                    searchTime = DateHelper.Year + ". márc. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "April":
-                    searchTime = MoneyHelper.Year + ". ápr. ";
+                    searchTime = DateHelper.Year + ". ápr. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "May":
-                    searchTime = MoneyHelper.Year + ". máj. ";
+                    searchTime = DateHelper.Year + ". máj. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "June":
-                    searchTime = MoneyHelper.Year + ". jún. ";
+                    searchTime = DateHelper.Year + ". jún. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "July":
-                    searchTime = MoneyHelper.Year + ". júl. ";
+                    searchTime = DateHelper.Year + ". júl. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "August":
-                    searchTime = MoneyHelper.Year + ". aug. ";
+                    searchTime = DateHelper.Year + ". aug. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "September":
-                    searchTime = MoneyHelper.Year + ". szept. ";
+                    searchTime = DateHelper.Year + ". szept. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "October":
-                    searchTime = MoneyHelper.Year + ". okt. ";
+                    searchTime = DateHelper.Year + ". okt. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "November":
-                    searchTime = MoneyHelper.Year + ". nov. ";
+                    searchTime = DateHelper.Year + ". nov. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
                 case "December":
-                    searchTime = MoneyHelper.Year + ". dec. ";
+                    searchTime = DateHelper.Year + ". dec. ";
                     LoadIncome(searchTime);
                     LoadExpense(searchTime);
                     break;
@@ -128,7 +130,7 @@ namespace iAboutMoney
             List<int> monthlyIncomeList = new List<int>();
             int income;
            
-            foreach (var item in MoneyHelper.SmsArray)
+            foreach (var item in WriteAndReadClass.SmsArray)
             {
                 if (item.Contains(s))
                 {                   
@@ -174,7 +176,7 @@ namespace iAboutMoney
             List<int> monthlyCreditList = new List<int>();
             int credit;
 
-            foreach (var item in MoneyHelper.SmsArray)
+            foreach (var item in WriteAndReadClass.SmsArray)
             {
                 if (item.Contains(s))
                 {
@@ -201,7 +203,7 @@ namespace iAboutMoney
             List<int> otherExpenseList = new List<int>();
             int otherExpense;
 
-            foreach (var item in MoneyHelper.SmsArray)
+            foreach (var item in WriteAndReadClass.SmsArray)
             {
                 if (item.Contains(s))
                 {
@@ -242,7 +244,7 @@ namespace iAboutMoney
             int monthlyFuelingAuchanStorno;
             int realTankolasAuchan;
 
-            foreach (var item in MoneyHelper.SmsArray)
+            foreach (var item in WriteAndReadClass.SmsArray)
             {
                 if (item.Contains(s))
                 {
@@ -311,7 +313,7 @@ namespace iAboutMoney
         {
             List<int> actualBalanceList = new List<int>();
 
-            foreach (var item in MoneyHelper.SmsArray)
+            foreach (var item in WriteAndReadClass.SmsArray)
             {
                 string dataEgy = SmsFileWorker.GetBetween(item, "Egy:+", ",-HUF");
                 string dataEgy2 = dataEgy.Replace(".", "");
@@ -532,12 +534,12 @@ namespace iAboutMoney
         /// <param name="e"></param>
         private void Year_Click(object sender, EventArgs e)
         {
-            labelMonth.Text = MoneyHelper.Year.ToString();
+            labelMonth.Text = DateHelper.Year.ToString();
 
-            YearlyIncomeFromDatab(MoneyHelper.Year);
-            YearlyExpenseFromDatab(MoneyHelper.Year);
-            YearlyCreditFromDatab(MoneyHelper.Year);
-            YearlyFuelingFromDatab(MoneyHelper.Year);
+            YearlyIncomeFromDatab(DateHelper.Year);
+            YearlyExpenseFromDatab(DateHelper.Year);
+            YearlyCreditFromDatab(DateHelper.Year);
+            YearlyFuelingFromDatab(DateHelper.Year);
 
             LoadSum();
         }
@@ -551,7 +553,7 @@ namespace iAboutMoney
         /// <param name="e"></param>
         private void Month_Click(object sender, EventArgs e)
         {
-            labelMonth.Text = MoneyHelper.Month;
+            labelMonth.Text = DateHelper.Month;
             LoadMonthData();
             LoadSum();            
         }
@@ -583,7 +585,7 @@ namespace iAboutMoney
             {                
                 case "February":
                     labelMonth.Text = "January";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -591,17 +593,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "January";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "March":
                     labelMonth.Text = "February";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -609,17 +611,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "February";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "April":
                     labelMonth.Text = "March";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -627,17 +629,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "March";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "May":
                     labelMonth.Text = "April";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -645,17 +647,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "April";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "June":
                     labelMonth.Text = "May";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -663,17 +665,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "May";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "July":
                     labelMonth.Text = "June";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -681,17 +683,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "June";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "August":
                     labelMonth.Text = "July";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -699,17 +701,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "July";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "September":
                     labelMonth.Text = "August";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -717,17 +719,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "August";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "October":
                     labelMonth.Text = "September";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -735,17 +737,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "September";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "November":
                     labelMonth.Text = "October";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -753,17 +755,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "October";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "December":
                     labelMonth.Text = "November";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -771,10 +773,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "November";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
@@ -811,7 +813,7 @@ namespace iAboutMoney
             {
                 case "January":
                     labelMonth.Text = "February";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -819,17 +821,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "February";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "February":
                     labelMonth.Text = "March";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -837,17 +839,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "March";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "March":
                     labelMonth.Text = "April";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -855,17 +857,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "April";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "April":
                     labelMonth.Text = "May";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -873,17 +875,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "May";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "May":
                     labelMonth.Text = "June";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -891,17 +893,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "June";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "June":
                     labelMonth.Text = "July";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -909,17 +911,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "July";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "July":
                     labelMonth.Text = "August";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -927,17 +929,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "August";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "August":
                     labelMonth.Text = "September";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -945,17 +947,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "September";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "September":
                     labelMonth.Text = "October";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -963,17 +965,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "October";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "October":
                     labelMonth.Text = "November";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -981,17 +983,17 @@ namespace iAboutMoney
                     else
                     {
                         month = "November";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
                     break;
                 case "November":
                     labelMonth.Text = "December";
-                    if (labelMonth.Text == MoneyHelper.Month)
+                    if (labelMonth.Text == DateHelper.Month)
                     {
                         LoadMonthData();
                         LoadSum();
@@ -999,10 +1001,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "December";
-                        MonthlyIncomeFromDatab(MoneyHelper.Year, month);
-                        MonthlyExpenseFromDatab(MoneyHelper.Year, month);
-                        MonthlyCreditFromDatab(MoneyHelper.Year, month);
-                        MonthlyFuelingFromDatab(MoneyHelper.Year, month);
+                        MonthlyIncomeFromDatab(DateHelper.Year, month);
+                        MonthlyExpenseFromDatab(DateHelper.Year, month);
+                        MonthlyCreditFromDatab(DateHelper.Year, month);
+                        MonthlyFuelingFromDatab(DateHelper.Year, month);
                         LoadSum();
 
                     }
@@ -1019,9 +1021,9 @@ namespace iAboutMoney
         /// </summary>
         private void ReadSavingTime()
         {
-            if (File.Exists(MoneyHelper.SavingTimeFilePath))
+            if (File.Exists(DateHelper.SavingTimeFilePath))
             {
-                moneyHelper.SavedMonthList = File.ReadAllLines(MoneyHelper.SavingTimeFilePath).ToList();
+                dateHelper.SavedMonthList = File.ReadAllLines(DateHelper.SavingTimeFilePath).ToList();
             }
         }
 
@@ -1033,17 +1035,17 @@ namespace iAboutMoney
         {
             ReadSavingTime();            
             
-            foreach (var item in moneyHelper.SavedMonthList)
+            foreach (var item in dateHelper.SavedMonthList)
             {
-                if (item == MoneyHelper.Month)
+                if (item == DateHelper.Month)
                 {
-                    moneyHelper.Saved = true;                    
+                    WriteAndReadClass.SavedToDatabase = true;                    
                 }
             }
 
-            if (moneyHelper.Saved == false)
+            if (WriteAndReadClass.SavedToDatabase == false)
             {
-                var task = Task.Run((Func<Task>)DropboxClass.Run);
+                var task = Task.Run((Func<Task>)DropboxClass.Download);
                 task.Wait();
                 LoadSavingData();
             }
@@ -1057,66 +1059,66 @@ namespace iAboutMoney
         {
             string searchString;
 
-            switch (MoneyHelper.Month)
+            switch (DateHelper.Month)
             {
                 case "January":
                     searchString = ". dec. ";
-                    SaveToDatabase(MoneyHelper.Year-1, searchString, "December");
+                    SaveToDatabase(DateHelper.Year-1, searchString, "December");
                     WriteSavingTimeToFile();
                     break;
                 case "February":
                     searchString = ". jan. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "January");
+                    SaveToDatabase(DateHelper.Year, searchString, "January");
                     WriteSavingTimeToFile();
                     break;
                 case "March":
                     searchString = ". febr. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "February");
+                    SaveToDatabase(DateHelper.Year, searchString, "February");
                     WriteSavingTimeToFile();
                     break;
                 case "April":
                     searchString = ". márc. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "March");
+                    SaveToDatabase(DateHelper.Year, searchString, "March");
                     WriteSavingTimeToFile();
                     break;
                 case "May":
                     searchString = ". ápr. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "April");
+                    SaveToDatabase(DateHelper.Year, searchString, "April");
                     WriteSavingTimeToFile();
                     break;
                 case "June":
                     searchString = ". máj. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "May");
+                    SaveToDatabase(DateHelper.Year, searchString, "May");
                     WriteSavingTimeToFile();
                     break;
                 case "July":
                     searchString = ". jún. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "Juny");
+                    SaveToDatabase(DateHelper.Year, searchString, "Juny");
                     WriteSavingTimeToFile();
                     break;
                 case "August":
                     searchString = ". júl. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "July");
+                    SaveToDatabase(DateHelper.Year, searchString, "July");
                     WriteSavingTimeToFile();
                     break;
                 case "September":
                     searchString = ". aug. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "August");
+                    SaveToDatabase(DateHelper.Year, searchString, "August");
                     WriteSavingTimeToFile();
                     break;
                 case "October":
                     searchString = ". szept. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "September");
+                    SaveToDatabase(DateHelper.Year, searchString, "September");
                     WriteSavingTimeToFile();
                     break;
                 case "November":
                     searchString = ". okt. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "October");
+                    SaveToDatabase(DateHelper.Year, searchString, "October");
                     WriteSavingTimeToFile();
                     break;
                 case "December":
                     searchString = ". nov. ";
-                    SaveToDatabase(MoneyHelper.Year, searchString, "November");
+                    SaveToDatabase(DateHelper.Year, searchString, "November");
                     WriteSavingTimeToFile();
                     break;
             }
@@ -1134,7 +1136,7 @@ namespace iAboutMoney
             int intSaveIncome;
 
             //Income
-            foreach (var item in MoneyHelper.SmsArray)
+            foreach (var item in WriteAndReadClass.SmsArray)
             {
                 if (item.Contains(year + month))
                 {
@@ -1168,18 +1170,22 @@ namespace iAboutMoney
 
             intSaveIncome = monthlySaveIncomeList.Sum();
 
-            sqlCon.Open();
-            sqlCmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
-            sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
-            sqlCmd.Parameters.AddWithValue("@Money", intSaveIncome);
-            sqlCmd.Parameters.AddWithValue("@Type", "Income");
-            sqlCmd.ExecuteNonQuery();
-            sqlCon.Close();
+            try
+            {
+                sqlCon.Open();
+                sqlCmd.Parameters.AddWithValue("@Year", DateHelper.Year);
+                sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
+                sqlCmd.Parameters.AddWithValue("@Money", intSaveIncome);
+                sqlCmd.Parameters.AddWithValue("@Type", "Income");
+                sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
+            }
+            catch (Exception) { }
 
             //Credit
             List<int> monthlySaveCreditList = new List<int>();
 
-            foreach (var item in MoneyHelper.SmsArray)
+            foreach (var item in WriteAndReadClass.SmsArray)
             {
                 if (item.Contains(year + month))
                 {
@@ -1202,7 +1208,7 @@ namespace iAboutMoney
             foreach (var item in monthlySaveCreditList)
             {
                 sqlCon.Open();
-                sqlCmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
+                sqlCmd.Parameters.AddWithValue("@Year", DateHelper.Year);
                 sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 sqlCmd.Parameters.AddWithValue("@Money", item);
                 sqlCmd.Parameters.AddWithValue("@Type", "Credit");
@@ -1213,7 +1219,7 @@ namespace iAboutMoney
             //Expense
             List<int> monthlySaveExpenseList = new List<int>();
 
-            foreach (var item in MoneyHelper.SmsArray)
+            foreach (var item in WriteAndReadClass.SmsArray)
             {
                 if (item.Contains(year + month))
                 {
@@ -1244,7 +1250,7 @@ namespace iAboutMoney
             foreach (var item in monthlySaveExpenseList)
             {
                 sqlCon.Open();
-                sqlCmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
+                sqlCmd.Parameters.AddWithValue("@Year", DateHelper.Year);
                 sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 sqlCmd.Parameters.AddWithValue("@Money", item);
                 sqlCmd.Parameters.AddWithValue("@Type", "Expense");
@@ -1260,7 +1266,7 @@ namespace iAboutMoney
             int intSaveFuelingAuchanStorno;
             int intRealFuelingAuchan;
 
-            foreach (var item in MoneyHelper.SmsArray)
+            foreach (var item in WriteAndReadClass.SmsArray)
             {
                 if (item.Contains(year + month))
                 {
@@ -1321,7 +1327,7 @@ namespace iAboutMoney
             foreach (var item in monthlySaveFuelingList)
             {
                 sqlCon.Open();
-                sqlCmd.Parameters.AddWithValue("@Year", MoneyHelper.Year);
+                sqlCmd.Parameters.AddWithValue("@Year", DateHelper.Year);
                 sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 sqlCmd.Parameters.AddWithValue("@Money", item);
                 sqlCmd.Parameters.AddWithValue("@Type", "Fueling");
@@ -1335,11 +1341,11 @@ namespace iAboutMoney
         /// </summary>
         private void WriteSavingTimeToFile()
         {
-            using (FileStream stream = new FileStream(MoneyHelper.SavingTimeFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+            using (FileStream stream = new FileStream(DateHelper.SavingTimeFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
-                    writer.WriteLine(MoneyHelper.Month);
+                    writer.WriteLine(DateHelper.Month);
                 }
             }
         }
@@ -1357,10 +1363,12 @@ namespace iAboutMoney
         /// <param name="e"></param>
         private void DownloadFileTitle_Click(object sender, EventArgs e)
         {
-            var task = Task.Run((Func<Task>)DropboxClass.Run);
+            var task = Task.Run((Func<Task>)DropboxClass.Download);
             task.Wait();
             DownloadFinishLabel.Visible = true;
-            moneyHelper.LoadDatasFromFile();
+            WriteAndReadClass.LoadDatasFromFile();
+            DropboxClass.MoveFileFromMainFolder();
+
             LoadMonthData();
             labelBalanceActual.Text = LoadActualBalance().ToString("C0");
             LoadSum();            

@@ -30,7 +30,7 @@ namespace iAboutMoney
         Form2 form2= new Form2();
         
         SerialPort myPort = new SerialPort();        
-        MoneyHelper moneyHelper = new MoneyHelper();
+        DateHelper dateHelper = new DateHelper();
 
 
         /// <summary>
@@ -40,11 +40,8 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_LoadAsync(object sender, EventArgs e)
         {
-            moneyHelper.SetDate();
-            moneyHelper.LoadDatasFromFile();
-
             try
             {
                 myPort.BaudRate = 9600;
@@ -56,6 +53,20 @@ namespace iAboutMoney
             timer.Interval = 30000;
             timer.Enabled = true;
             timer.Tick += new EventHandler(TemperatureMet);
+
+
+
+            dateHelper.SetDate();
+            WriteAndReadClass.LoadDatasFromFile();
+
+            if (WriteAndReadClass.ShouldDownloadFile())
+            {
+                await DropboxClass.Download();
+                WriteAndReadClass.WriteToFileDayOfDownloading(DateHelper.Day);                
+            }
+
+            DropboxClass.MoveFileFromMainFolder();
+            WriteAndReadClass.LoadDatasFromFile();
         }
 
         
@@ -80,39 +91,6 @@ namespace iAboutMoney
 
 
 
-
-        /// <summary>
-        /// Copy sms file out from main folder
-        /// Read sms to array
-        /// </summary>
-        /*public void LoadDatasFromFile()
-        {
-            DirectoryInfo d = new DirectoryInfo(@"C:\Users\totha\Source\Repos\iAboutMoneyGit\iAboutMoney\bin\Debug");
-            FileInfo[] Files = d.GetFiles("*.xml");
-            foreach (var item in Files)
-            {
-                if (item.Name.Contains("sms-"))
-                {
-                    File.Move(item.Name, @"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Dropbox\" + item.Name);
-                }
-            }
-
-            var files = Directory.GetFiles(@"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Dropbox", "*.xml");
-            foreach (var item in files)
-            {
-                if (item.Contains("sms-"))
-                {
-                    moneyHelper.FilePath = item;
-                }
-            }
-
-            string information = File.ReadAllText(moneyHelper.FilePath);
-            MoneyHelper.SmsArray = Regex.Split(information, @"<sms protocol=");
-        }
-
-    */
-
-
         
         /// <summary>
         /// Drawing the actual year Chart
@@ -133,71 +111,71 @@ namespace iAboutMoney
                 graphics.DrawLine(pen2, 12, 201, 166, 146);
 
                 //January
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". jan. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". jan. ", balanceList);
                 int janB = balanceList.Last();
                 //February
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". febr. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". febr. ", balanceList);
                 int febrB = balanceList.Last();
                 int[] points = SmsFileWorker.GetTheTwoChartPoints(janB, febrB, 201);
                 graphics.DrawLine(pen, 12, 201, 26, points[1]);
                 //March  
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". márc. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". márc. ", balanceList);
                 int marchB = balanceList.Last();
                 points = SmsFileWorker.GetTheTwoChartPoints( febrB, marchB, points[1]);
                 graphics.DrawLine(pen, 26, points[0], 40, points[1]);
                 //April
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". ápr. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". ápr. ", balanceList);
                 int aprilB = balanceList.Last();
                 points= SmsFileWorker.GetTheTwoChartPoints( marchB, aprilB, points[1]);
                 graphics.DrawLine(pen, 40, points[0], 54, points[1]);
                 //May
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". máj. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". máj. ", balanceList);
                 int mayB = balanceList.Last();
                 points= SmsFileWorker.GetTheTwoChartPoints( aprilB, mayB, points[1]);
                 graphics.DrawLine(pen, 54, points[0], 68, points[1]);
                 //June
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". jún. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". jún. ", balanceList);
                 int juneB = balanceList.Last();
                 points = SmsFileWorker.GetTheTwoChartPoints( mayB, juneB, points[1]);
                 graphics.DrawLine(pen, 68, points[0], 82, points[1]);
                 //July
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". júl. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". júl. ", balanceList);
                 int julyB = balanceList.Last();
                 points = SmsFileWorker.GetTheTwoChartPoints( juneB, julyB, points[1]);
                 graphics.DrawLine(pen, 82, points[0], 96, points[1]);
                 //August
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". aug. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". aug. ", balanceList);
                 int augustB = balanceList.Last();
                 points = SmsFileWorker.GetTheTwoChartPoints( julyB, augustB, points[1]);
                 graphics.DrawLine(pen, 96, points[0], 110, points[1]);
                 //September
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". szept. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". szept. ", balanceList);
                 int septemberB = balanceList.Last();
                 points = SmsFileWorker.GetTheTwoChartPoints( augustB, septemberB, points[1]);
                 graphics.DrawLine(pen, 110, points[0], 124, points[1]);
                 //October 
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". okt. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". okt. ", balanceList);
                 int octoberB = balanceList.Last();
                 points = SmsFileWorker.GetTheTwoChartPoints( septemberB, octoberB, points[1]);
                 graphics.DrawLine(pen, 124, points[0], 138, points[1]);
                 //November
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". nov. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". nov. ", balanceList);
                 int novemberB = balanceList.Last();
                 points = SmsFileWorker.GetTheTwoChartPoints( octoberB, novemberB, points[1]);
                 graphics.DrawLine(pen, 124, points[0], 138, points[1]);
                 //December
                 balanceList.Clear();
-                SmsFileWorker.LoadBalancesForChart(MoneyHelper.Year + ". dec. ", balanceList);
+                SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". dec. ", balanceList);
                 int decemberB = balanceList.Last();
                 points = SmsFileWorker.GetTheTwoChartPoints( novemberB, decemberB, points[1]);
                 graphics.DrawLine(pen, 124, points[0], 138, points[1]);

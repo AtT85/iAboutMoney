@@ -11,7 +11,7 @@ namespace ClassLibrary
     {        
         public static int Year { get; set; }
         public static string Month { get; set; }
-        public static int Day { get; set; }
+        public static string Day { get; set; }
         public static string SavingTimeFilePath { get; } = "savingTime.dat";
         public List<string> SavedMonthList { get; set; }
        
@@ -20,7 +20,7 @@ namespace ClassLibrary
         {
             var dateAndTime = DateTime.Now;
             Year = dateAndTime.Year;
-            Day = dateAndTime.Day;
+            Day = dateAndTime.Day.ToString();
 
             string tempMonth = dateAndTime.Month.ToString();
             switch (tempMonth)

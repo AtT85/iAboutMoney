@@ -16,6 +16,8 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Globalization;
 using ClassLibrary;
+using System.Threading;
+using System.Net.Mail;
 
 
 namespace iAboutMoney
@@ -46,11 +48,14 @@ namespace iAboutMoney
 
             LoadMonthData();
 
-            LoadSum();            
+            LoadSum();
         } 
 
-        
+        private void DataCollectorToReport()
+        {
 
+        }
+        
 
         
         private void LoadMonthData()
@@ -534,7 +539,7 @@ namespace iAboutMoney
         /// <param name="e"></param>
         private void Year_Click(object sender, EventArgs e)
         {
-            labelMonth.Text = DateHelper.Year.ToString();
+            labelMonth.Text = DateHelper.Year.ToString();            
 
             YearlyIncomeFromDatab(DateHelper.Year);
             YearlyExpenseFromDatab(DateHelper.Year);
@@ -1033,7 +1038,7 @@ namespace iAboutMoney
         /// </summary>
         private void Save()
         {
-            ReadSavingTime();            
+            ReadSavingTime();      
             
             foreach (var item in dateHelper.SavedMonthList)
             {
@@ -1064,62 +1069,62 @@ namespace iAboutMoney
                 case "January":
                     searchString = ". dec. ";
                     SaveToDatabase(DateHelper.Year-1, searchString, "December");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "February":
                     searchString = ". jan. ";
                     SaveToDatabase(DateHelper.Year, searchString, "January");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "March":
                     searchString = ". febr. ";
                     SaveToDatabase(DateHelper.Year, searchString, "February");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "April":
                     searchString = ". márc. ";
                     SaveToDatabase(DateHelper.Year, searchString, "March");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "May":
                     searchString = ". ápr. ";
                     SaveToDatabase(DateHelper.Year, searchString, "April");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "June":
                     searchString = ". máj. ";
                     SaveToDatabase(DateHelper.Year, searchString, "May");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "July":
                     searchString = ". jún. ";
                     SaveToDatabase(DateHelper.Year, searchString, "Juny");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "August":
                     searchString = ". júl. ";
                     SaveToDatabase(DateHelper.Year, searchString, "July");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "September":
                     searchString = ". aug. ";
                     SaveToDatabase(DateHelper.Year, searchString, "August");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "October":
                     searchString = ". szept. ";
                     SaveToDatabase(DateHelper.Year, searchString, "September");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "November":
                     searchString = ". okt. ";
                     SaveToDatabase(DateHelper.Year, searchString, "October");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "December":
                     searchString = ". nov. ";
                     SaveToDatabase(DateHelper.Year, searchString, "November");
-                    WriteSavingTimeToFile();
+                    WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
             }
         }
@@ -1336,21 +1341,7 @@ namespace iAboutMoney
             }
         }
 
-        /// <summary>
-        /// Write saving time(month) to file
-        /// </summary>
-        private void WriteSavingTimeToFile()
-        {
-            using (FileStream stream = new FileStream(DateHelper.SavingTimeFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
-            {
-                using (StreamWriter writer = new StreamWriter(stream))
-                {
-                    writer.WriteLine(DateHelper.Month);
-                }
-            }
-        }
         
-
 
 
         //DOWNLOAD FILE

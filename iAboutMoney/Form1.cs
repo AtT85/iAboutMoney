@@ -62,7 +62,7 @@ namespace iAboutMoney
             if (WriteAndReadClass.ShouldDownloadFile())
             {
                 await DropboxClass.Download();
-                WriteAndReadClass.WriteToFileDayOfDownloading(DateHelper.Day);                
+                WriteAndReadClass.WriteToFile( WriteAndReadClass.ShouldDownloadFilePath, DateHelper.Day.ToString());                
             }
 
             DropboxClass.MoveFileFromMainFolder();

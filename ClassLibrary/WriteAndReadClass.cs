@@ -15,9 +15,40 @@ namespace ClassLibrary
         public static string ShouldDownloadFilePath { get; set; } = @"C:\Users\totha\Source\Repos\LibraryiAboutMoney\ShouldDownload\dayOfDownloading.dat";
         public static bool ShouldDownload { get; set; }
 
+
+
+        public static string ReadFromFile(string filePath)
+        {
+            string readedData;
+
+            using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    readedData=reader.ReadLine();
+                }
+            }
+            return readedData;
+        }
+
+
+        public static void WriteToFile(string filePath, string data)
+        {
+            using (FileStream stream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.WriteLine(data);
+                }
+            }
+        }
+
+
+
         public static bool ShouldDownloadFile()
         {
             string readedDay;
+
             using (FileStream stream = new FileStream(ShouldDownloadFilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None))
             {
                 using (StreamReader reader = new StreamReader(stream))
@@ -27,22 +58,12 @@ namespace ClassLibrary
                     {
                         ShouldDownload = true;
                     }
-                }
-               
+                }               
             }
             return ShouldDownload;
         }   
 
-        public static void WriteToFileDayOfDownloading(int day)
-        {
-            using (FileStream stream = new FileStream(ShouldDownloadFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
-            {
-                using (StreamWriter writer = new StreamWriter(stream))
-                {
-                    writer.WriteLine(day);
-                }
-            }
-        }
+        
 
         public static void LoadDatasFromFile()
         {

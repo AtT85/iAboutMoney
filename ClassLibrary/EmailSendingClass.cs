@@ -9,7 +9,7 @@ namespace ClassLibrary
     //TODO use gmail api
     public static class EmailSendingClass
     {
-        public static string Pw { get; set; }
+        public static string S { get; set; }
         public static string EmailSubject { get;  } = "annual report";
         public static string EmailBody { get; set; }
         public static string ShouldQuartelYearReportSendFilePath { get;  } = @"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Email\shouldquartelyearreportsend.dat";
@@ -19,7 +19,11 @@ namespace ClassLibrary
 
         public static void SendReportInEmail()
         {
-            Pw = WriteAndReadClass.ReadFromFile(@"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Email");
+            try
+            {
+                S = WriteAndReadClass.ReadFromFile(@"C:\Users\totha\Source\Repos\LibraryiAboutMoney\Email\0.dat");
+            }
+            catch (Exception) { }
 
             var fromAddress = new MailAddress("attila85toth@gmail.com", "iAboutMoneyApp");
             var toAddress = new MailAddress("tothattila@rocketmail.com", "Attila Tóth");
@@ -29,7 +33,7 @@ namespace ClassLibrary
                 Port = 587,
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                Credentials = new NetworkCredential(fromAddress.Address, Pw),
+                Credentials = new NetworkCredential(fromAddress.Address, S),
                 Timeout = 20000
             };
 
@@ -43,9 +47,6 @@ namespace ClassLibrary
             }
         }
 
-        public static void DataCollectorToReport()
-        {
-
-        }
+        
     }
 }

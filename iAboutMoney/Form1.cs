@@ -66,6 +66,7 @@ namespace iAboutMoney
             }
 
             DropboxClass.MoveFileFromMainFolder();
+
             WriteAndReadClass.LoadDatasFromFile();
         }
 

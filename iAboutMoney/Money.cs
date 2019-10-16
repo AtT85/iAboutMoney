@@ -53,7 +53,12 @@ namespace iAboutMoney
 
         private void DataCollectorToReport()
         {
+            int income, credit, fueling, otherExpense, summary;            
 
+            if( DateHelper.Month=="April" || DateHelper.Month == "July" || DateHelper.Month == "October" || DateHelper.Month == "January" )
+            {
+
+            }
         }
         
 
@@ -65,72 +70,93 @@ namespace iAboutMoney
             {
                 case "January":
                     searchTime = DateHelper.Year + ". jan. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "February":
                     searchTime = DateHelper.Year + ". febr. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "March":
                     searchTime = DateHelper.Year + ". márc. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "April":
                     searchTime = DateHelper.Year + ". ápr. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "May":
                     searchTime = DateHelper.Year + ". máj. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "June":
                     searchTime = DateHelper.Year + ". jún. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "July":
                     searchTime = DateHelper.Year + ". júl. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "August":
                     searchTime = DateHelper.Year + ". aug. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "September":
                     searchTime = DateHelper.Year + ". szept. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "October":
                     searchTime = DateHelper.Year + ". okt. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "November":
                     searchTime = DateHelper.Year + ". nov. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "December":
                     searchTime = DateHelper.Year + ". dec. ";
-                    LoadIncome(searchTime);
-                    LoadExpense(searchTime);
+                    labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
+                    labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
+                    labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
+                    labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
             }
         }        
 
-        /// <summary>
-        /// Set Income label with SmsArray
-        /// </summary>
-        /// <param name="s">searched time interval</param>
-        private void LoadIncome(string s)
+        
+        private int LoadActualIncome(string s)
         {
             List<int> monthlyIncomeList = new List<int>();
             int income;
@@ -168,43 +194,14 @@ namespace iAboutMoney
             }
 
             income = monthlyIncomeList.Sum();
-            labelIncome.Text = income.ToString("C0");
+
+            return income;
         }       
 
-        /// <summary>
-        /// Set Expense, Credit, Fueling label with SmsArray
-        /// </summary>
-        /// <param name="s">searched time interval</param>
-        private void LoadExpense(string s)
-        {            
-            //CREDIT
-            List<int> monthlyCreditList = new List<int>();
-            int credit;
-
-            foreach (var item in WriteAndReadClass.SmsArray)
-            {
-                if (item.Contains(s))
-                {
-                    if (item.Contains("SIKERTELEN") || item.Contains("STORNO"))
-                    {
-
-                    }
-                    else if (item.Contains("TÖRLESZTÉS") || item.Contains("khitel Központ Zrt."))
-                    {                        
-                        string haviTorlesztes = SmsFileWorker.GetBetween(item, "S:-", ",-HUF");
-                        string dataTorlesztesReplaced = haviTorlesztes.Replace(".", "");
-                        if (int.TryParse(dataTorlesztesReplaced, out int intHaviTorlesztes))
-                        {
-                            monthlyCreditList.Add(intHaviTorlesztes);
-                        }
-                    }
-                }
-            }
-
-            credit = monthlyCreditList.Sum();
-            labelCredit.Text = credit.ToString("C0");
+        
+        private int LoadActualExpense(string s)
+        {          
             
-            //OTHER EXPENSE
             List<int> otherExpenseList = new List<int>();
             int otherExpense;
 
@@ -237,9 +234,45 @@ namespace iAboutMoney
             }
 
             otherExpense = otherExpenseList.Sum();
-            labelExpense.Text = otherExpense.ToString("C0");
 
-            //FUELING
+            return otherExpense;            
+        }
+
+
+        private int LoadActualCredit(string s)
+        {
+            List<int> monthlyCreditList = new List<int>();
+            int credit;
+
+            foreach (var item in WriteAndReadClass.SmsArray)
+            {
+                if (item.Contains(s))
+                {
+                    if (item.Contains("SIKERTELEN") || item.Contains("STORNO"))
+                    {
+
+                    }
+                    else if (item.Contains("TÖRLESZTÉS") || item.Contains("khitel Központ Zrt."))
+                    {
+                        string haviTorlesztes = SmsFileWorker.GetBetween(item, "S:-", ",-HUF");
+                        string dataTorlesztesReplaced = haviTorlesztes.Replace(".", "");
+                        if (int.TryParse(dataTorlesztesReplaced, out int intHaviTorlesztes))
+                        {
+                            monthlyCreditList.Add(intHaviTorlesztes);
+                        }
+                    }
+                }
+            }
+
+            credit = monthlyCreditList.Sum();
+
+            return credit;
+
+        }
+
+        private int LoadActualFueling(string s)
+        {
+
             List<int> monthlyFuelingList = new List<int>();
             int fueling;
 
@@ -260,19 +293,19 @@ namespace iAboutMoney
                     }
                     else if (item.Contains("SHELL TÖLTÖ") || item.Contains("MOL TÖLTÖ") ||
                         item.Contains("GP T") || item.Contains("; OMV"))
-                    {                        
-                         string haviTankolas = SmsFileWorker.GetBetween(item, ": -", " HUF;");
-                         string haviTankolasReplaced = haviTankolas.Replace(".", "");
-                         if (int.TryParse(haviTankolasReplaced, out int intHaviTankolas))
-                         {
+                    {
+                        string haviTankolas = SmsFileWorker.GetBetween(item, ": -", " HUF;");
+                        string haviTankolasReplaced = haviTankolas.Replace(".", "");
+                        if (int.TryParse(haviTankolasReplaced, out int intHaviTankolas))
+                        {
                             monthlyFuelingList.Add(intHaviTankolas);
-                         }
-                         string haviTankolas2 = SmsFileWorker.GetBetween(item, ":-", ",-HUF;");
-                         string haviTankolasReplaced2 = haviTankolas2.Replace(".", "");
-                         if (int.TryParse(haviTankolasReplaced2, out int intHaviTankolas2))
-                         {
+                        }
+                        string haviTankolas2 = SmsFileWorker.GetBetween(item, ":-", ",-HUF;");
+                        string haviTankolasReplaced2 = haviTankolas2.Replace(".", "");
+                        if (int.TryParse(haviTankolasReplaced2, out int intHaviTankolas2))
+                        {
                             monthlyFuelingList.Add(intHaviTankolas2);
-                         }
+                        }
                     }
                     //Fueling Auchan
                     else if (item.Contains("AUCHAN AUTBEN") && !item.Contains("STORNO"))
@@ -287,7 +320,7 @@ namespace iAboutMoney
                         string haviTankolasAuchanReplaced2 = haviTankolasAuchan2.Replace(".", "");
                         if (int.TryParse(haviTankolasAuchanReplaced2, out int intHaviTankolasAuchan2))
                         {
-                           monthlyFuelingListAuchan.Add(intHaviTankolasAuchan2);
+                            monthlyFuelingListAuchan.Add(intHaviTankolasAuchan2);
                         }
                     }
                     else if (item.Contains("AUCHAN AUTBEN") && item.Contains("STORNO"))
@@ -308,9 +341,10 @@ namespace iAboutMoney
             monthlyFuelingList.Add(realTankolasAuchan);
 
             fueling = monthlyFuelingList.Sum();
-            labelFueling.Text = fueling.ToString("C0");
+
+            return fueling;
         }
-       
+
         /// <summary>
         /// Set Balance label with SmsArray
         /// </summary>
@@ -355,6 +389,7 @@ namespace iAboutMoney
             int intFueling = int.Parse(fueling, NumberStyles.Currency);
 
             int sumrResult = intIncome - intExpense - intCredit - intFueling;
+
             labelSumResult.Text = sumrResult.ToString("C0");
         }          
         
@@ -365,7 +400,7 @@ namespace iAboutMoney
         /// Yearly income from database for set income label 
         /// </summary>
         /// <param name="y">searched year</param>
-        private void YearlyIncomeFromDatab(int y)
+        private int YearlyIncomeFromDatab(int y)
         {
             List<int> ListYearIncome = new List<int>();
             int intYearlyIncome;
@@ -378,14 +413,15 @@ namespace iAboutMoney
             }
 
             intYearlyIncome = ListYearIncome.Sum();
-            labelIncome.Text = intYearlyIncome.ToString("C0");
+
+            return intYearlyIncome;
         }
 
         /// <summary>
         /// Yearly expense from database for set expense label
         /// </summary>
         /// <param name="y">searched year</param>
-        private void YearlyExpenseFromDatab(int y)
+        private int YearlyExpenseFromDatab(int y)
         {
             List<int> ListYearExpense = new List<int>();
             int intYearlyExpense;
@@ -398,14 +434,15 @@ namespace iAboutMoney
             }
 
             intYearlyExpense = ListYearExpense.Sum();
-            labelExpense.Text = intYearlyExpense.ToString("C0");
+
+            return intYearlyExpense;
         }
 
         /// <summary>
         /// Yearly credit from database for set credit label
         /// </summary>
         /// <param name="y">searched year</param>
-        private void YearlyCreditFromDatab(int y)
+        private int YearlyCreditFromDatab(int y)
         {
             List<int> ListYearCredit = new List<int>();
             int intYearlyCredit;
@@ -418,14 +455,15 @@ namespace iAboutMoney
             }
 
             intYearlyCredit = ListYearCredit.Sum();
-            labelCredit.Text = intYearlyCredit.ToString("C0");
+
+            return intYearlyCredit;
         }
 
         /// <summary>
         /// Yearly fueling from database for set fueling label
         /// </summary>
         /// <param name="y">searched year</param>
-        private void YearlyFuelingFromDatab(int y)
+        private int YearlyFuelingFromDatab(int y)
         {
             List<int> ListYearFueling = new List<int>();
             int intYearlyFueling;
@@ -438,7 +476,8 @@ namespace iAboutMoney
             }
 
             intYearlyFueling = ListYearFueling.Sum();
-            labelFueling.Text = intYearlyFueling.ToString("C0");
+
+            return intYearlyFueling;
         }
 
         /// <summary>
@@ -446,7 +485,7 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="y">searched year</param>
         /// <param name="m">searched month</param>
-        private void MonthlyIncomeFromDatab(int y, string m)
+        private int MonthlyIncomeFromDatab(int y, string m)
         {
             List<int> monthlyIncomeList = new List<int>();
             int intMonthlyIncome;            
@@ -459,7 +498,8 @@ namespace iAboutMoney
             }
 
             intMonthlyIncome = monthlyIncomeList.Sum();
-            labelIncome.Text = intMonthlyIncome.ToString("C0");
+
+            return intMonthlyIncome;
         }
 
         /// <summary>
@@ -467,7 +507,7 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="y">searched year</param>
         /// <param name="m">searched month</param>
-        private void MonthlyExpenseFromDatab(int y, string m)
+        private int MonthlyExpenseFromDatab(int y, string m)
         {
             List<int> monthlyExpenseList = new List<int>();
             int intMonthlyExpense;
@@ -480,7 +520,8 @@ namespace iAboutMoney
             }
 
             intMonthlyExpense = monthlyExpenseList.Sum();
-            labelExpense.Text = intMonthlyExpense.ToString("C0");
+
+            return intMonthlyExpense;
         }
 
         /// <summary>
@@ -488,7 +529,7 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="y">searched year</param>
         /// <param name="m">searched month</param>
-        private void MonthlyCreditFromDatab(int y, string m)
+        private int MonthlyCreditFromDatab(int y, string m)
         {
             List<int> monthlyCreditList = new List<int>();
             int intMonthlyCredit;
@@ -501,7 +542,8 @@ namespace iAboutMoney
             }
 
             intMonthlyCredit = monthlyCreditList.Sum();
-            labelCredit.Text = intMonthlyCredit.ToString("C0");
+
+            return intMonthlyCredit;
         }
 
         /// <summary>
@@ -509,7 +551,7 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="y">searched year</param>
         /// <param name="m">searched month</param>
-        private void MonthlyFuelingFromDatab(int y, string m)
+        private int MonthlyFuelingFromDatab(int y, string m)
         {
             List<int> monthlyFuelingList = new List<int>();
             int intMonthlyFueling;
@@ -522,7 +564,8 @@ namespace iAboutMoney
             }
 
             intMonthlyFueling = monthlyFuelingList.Sum();
-            labelFueling.Text = intMonthlyFueling.ToString("C0");
+
+            return intMonthlyFueling;
         }
 
         
@@ -541,10 +584,10 @@ namespace iAboutMoney
         {
             labelMonth.Text = DateHelper.Year.ToString();            
 
-            YearlyIncomeFromDatab(DateHelper.Year);
-            YearlyExpenseFromDatab(DateHelper.Year);
-            YearlyCreditFromDatab(DateHelper.Year);
-            YearlyFuelingFromDatab(DateHelper.Year);
+            labelIncome.Text = YearlyIncomeFromDatab(DateHelper.Year).ToString("C0");
+            labelExpense.Text = YearlyExpenseFromDatab(DateHelper.Year).ToString("C0");
+            labelCredit.Text = YearlyCreditFromDatab(DateHelper.Year).ToString("C0");
+            labelFueling.Text = YearlyFuelingFromDatab(DateHelper.Year).ToString("C0");
 
             LoadSum();
         }
@@ -577,10 +620,10 @@ namespace iAboutMoney
             if (int.TryParse(labelMonth.Text, out int year))
             {
                 int searchYear = year-1;
-                YearlyIncomeFromDatab(searchYear);
-                YearlyExpenseFromDatab(searchYear);
-                YearlyCreditFromDatab(searchYear);
-                YearlyFuelingFromDatab(searchYear);
+                labelIncome.Text = YearlyIncomeFromDatab(searchYear).ToString("C0");
+                labelExpense.Text = YearlyExpenseFromDatab(searchYear).ToString("C0");
+                labelCredit.Text = YearlyCreditFromDatab(searchYear).ToString("C0");
+                labelFueling.Text = YearlyFuelingFromDatab(searchYear).ToString("C0");
 
                 LoadSum();
                 labelMonth.Text = searchYear.ToString();
@@ -598,10 +641,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "January";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -616,10 +659,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "February";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -634,10 +677,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "March";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -652,10 +695,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "April";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -670,10 +713,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "May";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -688,10 +731,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "June";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -706,10 +749,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "July";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -724,10 +767,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "August";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -742,10 +785,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "September";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -760,10 +803,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "October";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -778,10 +821,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "November";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -803,10 +846,10 @@ namespace iAboutMoney
             if (int.TryParse(labelMonth.Text, out int year))
             {
                 int searchYear = year + 1;
-                YearlyIncomeFromDatab(searchYear);
-                YearlyExpenseFromDatab(searchYear);
-                YearlyCreditFromDatab(searchYear);
-                YearlyFuelingFromDatab(searchYear);
+                labelIncome.Text = YearlyIncomeFromDatab(searchYear).ToString("C0");
+                labelExpense.Text = YearlyExpenseFromDatab(searchYear).ToString("C0");
+                labelCredit.Text = YearlyCreditFromDatab(searchYear).ToString("C0");
+                labelFueling.Text = YearlyFuelingFromDatab(searchYear).ToString("C0");
 
                 LoadSum();
                 labelMonth.Text = searchYear.ToString();
@@ -826,10 +869,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "February";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -844,10 +887,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "March";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -862,10 +905,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "April";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -880,10 +923,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "May";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -898,10 +941,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "June";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -916,10 +959,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "July";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -934,10 +977,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "August";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -952,10 +995,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "September";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -970,10 +1013,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "October";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -988,10 +1031,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "November";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }
@@ -1006,10 +1049,10 @@ namespace iAboutMoney
                     else
                     {
                         month = "December";
-                        MonthlyIncomeFromDatab(DateHelper.Year, month);
-                        MonthlyExpenseFromDatab(DateHelper.Year, month);
-                        MonthlyCreditFromDatab(DateHelper.Year, month);
-                        MonthlyFuelingFromDatab(DateHelper.Year, month);
+                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
+                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
                         LoadSum();
 
                     }

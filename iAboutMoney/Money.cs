@@ -400,12 +400,12 @@ namespace iAboutMoney
         /// Yearly income from database for set income label 
         /// </summary>
         /// <param name="y">searched year</param>
-        private int YearlyIncomeFromDatab(int y)
+        private async Task<int> YearlyIncomeFromDatabAsync(int y)
         {
             List<int> ListYearIncome = new List<int>();
             int intYearlyIncome;
 
-            var varYearlyIncome = from c in moneyDb where (c.Year == y && c.Type == "Income") select c.Money;
+            var varYearlyIncome = await Task.Run(() => from c in moneyDb where (c.Year == y && c.Type == "Income") select c.Money);
 
             foreach (var item in varYearlyIncome)
             {
@@ -421,12 +421,12 @@ namespace iAboutMoney
         /// Yearly expense from database for set expense label
         /// </summary>
         /// <param name="y">searched year</param>
-        private int YearlyExpenseFromDatab(int y)
+        private async Task<int> YearlyExpenseFromDatabAsync(int y)
         {
             List<int> ListYearExpense = new List<int>();
             int intYearlyExpense;
 
-            var varYearlyExpense = from c in moneyDb where (c.Year == y && c.Type == "Expense") select c.Money;
+            var varYearlyExpense = await Task.Run(() => from c in moneyDb where (c.Year == y && c.Type == "Expense") select c.Money);
 
             foreach (var item in varYearlyExpense)
             {
@@ -442,12 +442,12 @@ namespace iAboutMoney
         /// Yearly credit from database for set credit label
         /// </summary>
         /// <param name="y">searched year</param>
-        private int YearlyCreditFromDatab(int y)
+        private async Task<int> YearlyCreditFromDatabAsync(int y)
         {
             List<int> ListYearCredit = new List<int>();
             int intYearlyCredit;
 
-            var varYearlyCredit = from c in moneyDb where (c.Year == y && c.Type == "Credit") select c.Money;
+            var varYearlyCredit = await Task.Run(() => from c in moneyDb where (c.Year == y && c.Type == "Credit") select c.Money);
 
             foreach (var item in varYearlyCredit)
             {
@@ -463,12 +463,12 @@ namespace iAboutMoney
         /// Yearly fueling from database for set fueling label
         /// </summary>
         /// <param name="y">searched year</param>
-        private int YearlyFuelingFromDatab(int y)
+        private async Task<int> YearlyFuelingFromDatabAsync(int y)
         {
             List<int> ListYearFueling = new List<int>();
             int intYearlyFueling;
 
-            var varYearlyFueling = from c in moneyDb where (c.Year == y && c.Type == "Fueling") select c.Money;
+            var varYearlyFueling = await Task.Run(() => from c in moneyDb where (c.Year == y && c.Type == "Fueling") select c.Money);
 
             foreach (var item in varYearlyFueling)
             {
@@ -485,12 +485,12 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="y">searched year</param>
         /// <param name="m">searched month</param>
-        private int MonthlyIncomeFromDatab(int y, string m)
+        private async Task<int> MonthlyIncomeFromDatabAsync(int y, string m)
         {
             List<int> monthlyIncomeList = new List<int>();
             int intMonthlyIncome;            
           
-            var varMonthlyIncome = from c in moneyDb where (c.Year==y && c.Month == m && c.Type == "Income") select c.Money;
+            var varMonthlyIncome = await Task.Run(() => from c in moneyDb where (c.Year==y && c.Month == m && c.Type == "Income") select c.Money);
 
             foreach (var item in varMonthlyIncome)
             {
@@ -507,12 +507,12 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="y">searched year</param>
         /// <param name="m">searched month</param>
-        private int MonthlyExpenseFromDatab(int y, string m)
+        private async Task<int> MonthlyExpenseFromDatabAsync(int y, string m)
         {
             List<int> monthlyExpenseList = new List<int>();
             int intMonthlyExpense;
 
-            var varMonthlylyExpense = from c in moneyDb where (c.Year == y && c.Month == m && c.Type == "Expense") select c.Money;
+            var varMonthlylyExpense = await Task.Run(() => from c in moneyDb where (c.Year == y && c.Month == m && c.Type == "Expense") select c.Money);
 
             foreach (var item in varMonthlylyExpense)
             {
@@ -529,12 +529,12 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="y">searched year</param>
         /// <param name="m">searched month</param>
-        private int MonthlyCreditFromDatab(int y, string m)
+        private async Task<int> MonthlyCreditFromDatabAsync(int y, string m)
         {
             List<int> monthlyCreditList = new List<int>();
             int intMonthlyCredit;
             
-            var varMonthlylyCredit = from c in moneyDb where (c.Year == y && c.Month == m && c.Type == "Credit") select c.Money;
+            var varMonthlylyCredit = await Task.Run(() => from c in moneyDb where (c.Year == y && c.Month == m && c.Type == "Credit") select c.Money);
 
             foreach (var item in varMonthlylyCredit)
             {
@@ -551,12 +551,12 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="y">searched year</param>
         /// <param name="m">searched month</param>
-        private int MonthlyFuelingFromDatab(int y, string m)
+        private async Task<int> MonthlyFuelingFromDatabAsync(int y, string m)
         {
             List<int> monthlyFuelingList = new List<int>();
             int intMonthlyFueling;
 
-            var varMonthlyFueling = from c in moneyDb where (c.Year == y && c.Month == m && c.Type == "Fueling") select c.Money;
+            var varMonthlyFueling = await Task.Run(() => from c in moneyDb where (c.Year == y && c.Month == m && c.Type == "Fueling") select c.Money);
 
             foreach (var item in varMonthlyFueling)
             {
@@ -580,14 +580,17 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Year_Click(object sender, EventArgs e)
+        private async void Year_Click(object sender, EventArgs e)
         {
-            labelMonth.Text = DateHelper.Year.ToString();            
-
-            labelIncome.Text = YearlyIncomeFromDatab(DateHelper.Year).ToString("C0");
-            labelExpense.Text = YearlyExpenseFromDatab(DateHelper.Year).ToString("C0");
-            labelCredit.Text = YearlyCreditFromDatab(DateHelper.Year).ToString("C0");
-            labelFueling.Text = YearlyFuelingFromDatab(DateHelper.Year).ToString("C0");
+            labelMonth.Text = DateHelper.Year.ToString();
+            int income = await YearlyIncomeFromDatabAsync(DateHelper.Year);
+            labelIncome.Text = income.ToString("C0");
+            int expense = await YearlyExpenseFromDatabAsync(DateHelper.Year);
+            labelExpense.Text = expense.ToString("C0");
+            int credit = await YearlyCreditFromDatabAsync(DateHelper.Year);
+            labelCredit.Text = credit.ToString("C0");
+            int fueling = await YearlyFuelingFromDatabAsync(DateHelper.Year);
+            labelFueling.Text = fueling.ToString("C0");
 
             LoadSum();
         }
@@ -614,16 +617,20 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Prev_Click(object sender, EventArgs e)
+        private async void Prev_Click(object sender, EventArgs e)
         {
 
             if (int.TryParse(labelMonth.Text, out int year))
             {
                 int searchYear = year-1;
-                labelIncome.Text = YearlyIncomeFromDatab(searchYear).ToString("C0");
-                labelExpense.Text = YearlyExpenseFromDatab(searchYear).ToString("C0");
-                labelCredit.Text = YearlyCreditFromDatab(searchYear).ToString("C0");
-                labelFueling.Text = YearlyFuelingFromDatab(searchYear).ToString("C0");
+                int income = await YearlyIncomeFromDatabAsync(searchYear);
+                labelIncome.Text = income.ToString("C0");
+                int expense = await YearlyExpenseFromDatabAsync(searchYear);
+                labelExpense.Text = expense.ToString("C0");
+                int credit = await YearlyCreditFromDatabAsync(searchYear);
+                labelCredit.Text = credit.ToString("C0");
+                int fueling = await YearlyFuelingFromDatabAsync(searchYear);
+                labelFueling.Text = fueling.ToString("C0");
 
                 LoadSum();
                 labelMonth.Text = searchYear.ToString();
@@ -641,10 +648,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "January";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -659,10 +670,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "February";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -677,10 +692,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "March";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -695,10 +714,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "April";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -713,10 +736,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "May";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -731,10 +758,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "June";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -749,10 +780,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "July";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -767,10 +802,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "August";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -785,10 +824,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "September";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -803,10 +846,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "October";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -821,10 +868,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "November";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -840,16 +891,20 @@ namespace iAboutMoney
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Next_Click(object sender, EventArgs e)
+        private async void Next_Click(object sender, EventArgs e)
         {
 
             if (int.TryParse(labelMonth.Text, out int year))
             {
                 int searchYear = year + 1;
-                labelIncome.Text = YearlyIncomeFromDatab(searchYear).ToString("C0");
-                labelExpense.Text = YearlyExpenseFromDatab(searchYear).ToString("C0");
-                labelCredit.Text = YearlyCreditFromDatab(searchYear).ToString("C0");
-                labelFueling.Text = YearlyFuelingFromDatab(searchYear).ToString("C0");
+                int income = await YearlyIncomeFromDatabAsync(searchYear);
+                labelIncome.Text = income.ToString("C0");
+                int expense = await YearlyExpenseFromDatabAsync(searchYear);
+                labelExpense.Text = expense.ToString("C0");
+                int credit = await YearlyCreditFromDatabAsync(searchYear);
+                labelCredit.Text = credit.ToString("C0");
+                int fueling = await YearlyFuelingFromDatabAsync(searchYear);
+                labelFueling.Text = fueling.ToString("C0");
 
                 LoadSum();
                 labelMonth.Text = searchYear.ToString();
@@ -869,10 +924,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "February";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -887,10 +946,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "March";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -905,10 +968,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "April";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -923,10 +990,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "May";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -941,10 +1012,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "June";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -959,10 +1034,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "July";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -977,10 +1056,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "August";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -995,10 +1078,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "September";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -1013,10 +1100,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "October";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -1031,10 +1122,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "November";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }
@@ -1049,10 +1144,14 @@ namespace iAboutMoney
                     else
                     {
                         month = "December";
-                        labelIncome.Text = MonthlyIncomeFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelExpense.Text = MonthlyExpenseFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelCredit.Text = MonthlyCreditFromDatab(DateHelper.Year, month).ToString("C0");
-                        labelFueling.Text = MonthlyFuelingFromDatab(DateHelper.Year, month).ToString("C0");
+                        int income = await MonthlyIncomeFromDatabAsync(DateHelper.Year, month);
+                        labelIncome.Text = income.ToString("C0");
+                        int expense = await MonthlyExpenseFromDatabAsync(DateHelper.Year, month);
+                        labelExpense.Text = expense.ToString("C0");
+                        int credit = await MonthlyCreditFromDatabAsync(DateHelper.Year, month);
+                        labelCredit.Text = credit.ToString("C0");
+                        int fueling = await MonthlyFuelingFromDatabAsync(DateHelper.Year, month);
+                        labelFueling.Text = fueling.ToString("C0");
                         LoadSum();
 
                     }

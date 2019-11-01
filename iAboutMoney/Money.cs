@@ -30,8 +30,7 @@ namespace iAboutMoney
         Table<MoneyInfoTable> moneyDb = dataContext.GetTable<MoneyInfoTable>();
 
         static SqlConnection sqlCon = new SqlConnection(Database.ConnectionString);
-        SqlCommand sqlCmd = new SqlCommand(Database.SqlComm, sqlCon);
-
+        //SqlCommand sqlCmd;
 
         public Form2()
         {
@@ -394,7 +393,7 @@ namespace iAboutMoney
         }          
         
 
-
+        ///TODO Parallel async
         //DATABASE        
         /// <summary>
         /// Yearly income from database for set income label 
@@ -1320,6 +1319,7 @@ namespace iAboutMoney
             try
             {
                 sqlCon.Open();
+                SqlCommand sqlCmd = new SqlCommand(Database.SqlComm, sqlCon);
                 sqlCmd.Parameters.AddWithValue("@Year", DateHelper.Year);
                 sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 sqlCmd.Parameters.AddWithValue("@Money", intSaveIncome);
@@ -1355,6 +1355,7 @@ namespace iAboutMoney
             foreach (var item in monthlySaveCreditList)
             {
                 sqlCon.Open();
+                SqlCommand sqlCmd = new SqlCommand(Database.SqlComm, sqlCon);
                 sqlCmd.Parameters.AddWithValue("@Year", DateHelper.Year);
                 sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 sqlCmd.Parameters.AddWithValue("@Money", item);
@@ -1397,6 +1398,7 @@ namespace iAboutMoney
             foreach (var item in monthlySaveExpenseList)
             {
                 sqlCon.Open();
+                SqlCommand sqlCmd = new SqlCommand(Database.SqlComm, sqlCon);
                 sqlCmd.Parameters.AddWithValue("@Year", DateHelper.Year);
                 sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 sqlCmd.Parameters.AddWithValue("@Money", item);
@@ -1474,6 +1476,7 @@ namespace iAboutMoney
             foreach (var item in monthlySaveFuelingList)
             {
                 sqlCon.Open();
+                SqlCommand sqlCmd = new SqlCommand(Database.SqlComm, sqlCon);
                 sqlCmd.Parameters.AddWithValue("@Year", DateHelper.Year);
                 sqlCmd.Parameters.AddWithValue("@Month", monthToDatabase);
                 sqlCmd.Parameters.AddWithValue("@Money", item);

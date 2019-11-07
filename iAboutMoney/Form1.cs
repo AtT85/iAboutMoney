@@ -173,13 +173,13 @@ namespace iAboutMoney
                 SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". nov. ", balanceList);
                 int novemberB = balanceList.Last();
                 points = SmsFileWorker.GetTheTwoChartPoints( octoberB, novemberB, points[1]);
-                graphics.DrawLine(pen, 124, points[0], 138, points[1]);
+                graphics.DrawLine(pen, 138, points[0], 152, points[1]);
                 //December
                 balanceList.Clear();
                 SmsFileWorker.LoadBalancesForChart(DateHelper.Year + ". dec. ", balanceList);
                 int decemberB = balanceList.Last();
                 points = SmsFileWorker.GetTheTwoChartPoints( novemberB, decemberB, points[1]);
-                graphics.DrawLine(pen, 124, points[0], 138, points[1]);
+                graphics.DrawLine(pen, 152, points[0], 166, points[1]);
             }
             catch (Exception) { }
             

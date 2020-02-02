@@ -21,7 +21,6 @@ namespace ClassLibrary
             var dateAndTime = DateTime.Now;
             Year = dateAndTime.Year;
             Day = dateAndTime.Day.ToString();
-
             string tempMonth = dateAndTime.Month.ToString();
             switch (tempMonth)
             {

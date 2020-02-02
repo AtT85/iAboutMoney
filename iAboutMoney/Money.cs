@@ -68,84 +68,84 @@ namespace iAboutMoney
             switch (DateHelper.Month)
             {
                 case "January":
-                    searchTime = DateHelper.Year + ". jan. ";
+                    searchTime =  ".01."+ DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "February":
-                    searchTime = DateHelper.Year + ". febr. ";
+                    searchTime = ".02." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "March":
-                    searchTime = DateHelper.Year + ". márc. ";
+                    searchTime = ".03." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "April":
-                    searchTime = DateHelper.Year + ". ápr. ";
+                    searchTime = ".04." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "May":
-                    searchTime = DateHelper.Year + ". máj. ";
+                    searchTime = ".05." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "June":
-                    searchTime = DateHelper.Year + ". jún. ";
+                    searchTime = ".06." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "July":
-                    searchTime = DateHelper.Year + ". júl. ";
+                    searchTime = ".07." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "August":
-                    searchTime = DateHelper.Year + ". aug. ";
+                    searchTime = ".08." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "September":
-                    searchTime = DateHelper.Year + ". szept. ";
+                    searchTime = ".09." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "October":
-                    searchTime = DateHelper.Year + ". okt. ";
+                    searchTime = ".10." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "November":
-                    searchTime = DateHelper.Year + ". nov. ";
+                    searchTime = ".11." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
                     labelFueling.Text = LoadActualFueling(searchTime).ToString("C0");
                     break;
                 case "December":
-                    searchTime = DateHelper.Year + ". dec. ";
+                    searchTime = ".12." + DateHelper.Year;
                     labelIncome.Text = LoadActualIncome(searchTime).ToString("C0");
                     labelExpense.Text = LoadActualExpense(searchTime).ToString("C0");
                     labelCredit.Text = LoadActualCredit(searchTime).ToString("C0");
@@ -182,12 +182,12 @@ namespace iAboutMoney
                         {
                             monthlyIncomeList.Add(intHaviBevetel2);
                         }
-                        string haviBevetel3 = SmsFileWorker.GetBetween(item, ":+", ",-HUF; Közl");
-                        string haviBevetelReplaced3 = haviBevetel3.Replace(".", "");
-                        if (int.TryParse(haviBevetelReplaced3, out int intHaviBevetel3))
-                        {
-                            monthlyIncomeList.Add(intHaviBevetel3);
-                        }
+                        //string haviBevetel3 = SmsFileWorker.GetBetween(item, ":+", ",-HUF; Közl");
+                        //string haviBevetelReplaced3 = haviBevetel3.Replace(".", "");
+                        //if (int.TryParse(haviBevetelReplaced3, out int intHaviBevetel3))
+                        //{
+                        //    monthlyIncomeList.Add(intHaviBevetel3);
+                        //}
                     }                    
                 }
             }
@@ -208,7 +208,7 @@ namespace iAboutMoney
             {
                 if (item.Contains(s))
                 {
-                    if (item.Contains("SIKERTELEN") || item.Contains("STORNO") || item.Contains("khitel Központ Zrt.") || item.Contains("SHELL TÖLTÖ")
+                    if (item.Contains("SIKERTELEN") || item.Contains("STORNO") || item.Contains("khitel Központ Zrt.") || item.Contains("SHELL")
                         || item.Contains("MOL TÖLTÖ") || item.Contains("GP T") || item.Contains("AUCHAN AUTBEN") || item.Contains("; OMV"))
                     {
 
@@ -290,7 +290,7 @@ namespace iAboutMoney
                     {
 
                     }
-                    else if (item.Contains("SHELL TÖLTÖ") || item.Contains("MOL TÖLTÖ") ||
+                    else if (item.Contains("SHELL") || item.Contains("MOL TÖLTÖ") ||
                         item.Contains("GP T") || item.Contains("; OMV"))
                     {
                         string haviTankolas = SmsFileWorker.GetBetween(item, ": -", " HUF;");
@@ -1208,62 +1208,62 @@ namespace iAboutMoney
             switch (DateHelper.Month)
             {
                 case "January":
-                    searchString = ". dec. ";
+                    searchString = ".12.";
                     SaveToDatabase(DateHelper.Year-1, searchString, "December");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "February":
-                    searchString = ". jan. ";
+                    searchString = ".01.";
                     SaveToDatabase(DateHelper.Year, searchString, "January");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "March":
-                    searchString = ". febr. ";
+                    searchString = ".02.";
                     SaveToDatabase(DateHelper.Year, searchString, "February");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "April":
-                    searchString = ". márc. ";
+                    searchString = ".03.";
                     SaveToDatabase(DateHelper.Year, searchString, "March");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "May":
-                    searchString = ". ápr. ";
+                    searchString = ".04.";
                     SaveToDatabase(DateHelper.Year, searchString, "April");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "June":
-                    searchString = ". máj. ";
+                    searchString = ".05.";
                     SaveToDatabase(DateHelper.Year, searchString, "May");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "July":
-                    searchString = ". jún. ";
+                    searchString = ".06.";
                     SaveToDatabase(DateHelper.Year, searchString, "Juny");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "August":
-                    searchString = ". júl. ";
+                    searchString = ".07.";
                     SaveToDatabase(DateHelper.Year, searchString, "July");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "September":
-                    searchString = ". aug. ";
+                    searchString = ".08.";
                     SaveToDatabase(DateHelper.Year, searchString, "August");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "October":
-                    searchString = ". szept. ";
+                    searchString = ".09.";
                     SaveToDatabase(DateHelper.Year, searchString, "September");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "November":
-                    searchString = ". okt. ";
+                    searchString = ".10.";
                     SaveToDatabase(DateHelper.Year, searchString, "October");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
                 case "December":
-                    searchString = ". nov. ";
+                    searchString = ".11.";
                     SaveToDatabase(DateHelper.Year, searchString, "November");
                     WriteAndReadClass.WriteToFile(DateHelper.SavingTimeFilePath, DateHelper.Month);
                     break;
@@ -1284,7 +1284,7 @@ namespace iAboutMoney
             //Income
             foreach (var item in WriteAndReadClass.SmsArray)
             {
-                if (item.Contains(year + month))
+                if (item.Contains(month+year))
                 {
                     if (item.Contains("SIKERTELEN") || item.Contains("STORNO"))
                     {
@@ -1304,12 +1304,12 @@ namespace iAboutMoney
                         {
                             monthlySaveIncomeList.Add(intHaviBevetel2);
                         }
-                        string haviBevetel3 = SmsFileWorker.GetBetween(item, ":+", ",-HUF; Közl");
-                        string haviBevetelReplaced3 = haviBevetel3.Replace(".", "");
-                        if (int.TryParse(haviBevetelReplaced3, out int intHaviBevetel3))
-                        {
-                            monthlySaveIncomeList.Add(intHaviBevetel3);
-                        }
+                        //string haviBevetel3 = SmsFileWorker.GetBetween(item, ":+", ",-HUF; Közl");
+                        //string haviBevetelReplaced3 = haviBevetel3.Replace(".", "");
+                        //if (int.TryParse(haviBevetelReplaced3, out int intHaviBevetel3))
+                        //{
+                        //    monthlySaveIncomeList.Add(intHaviBevetel3);
+                        //}
                     }
                 }
             }
@@ -1334,7 +1334,7 @@ namespace iAboutMoney
 
             foreach (var item in WriteAndReadClass.SmsArray)
             {
-                if (item.Contains(year + month))
+                if (item.Contains(month+year))
                 {
                     if (item.Contains("SIKERTELEN") || item.Contains("STORNO"))
                     {
@@ -1369,9 +1369,9 @@ namespace iAboutMoney
 
             foreach (var item in WriteAndReadClass.SmsArray)
             {
-                if (item.Contains(year + month))
+                if (item.Contains(month + year))
                 {
-                    if (item.Contains("SIKERTELEN") || item.Contains("STORNO") || item.Contains("khitel Központ Zrt.") || item.Contains("SHELL TÖLTÖ")
+                    if (item.Contains("SIKERTELEN") || item.Contains("STORNO") || item.Contains("khitel Központ Zrt.") || item.Contains("SHELL")
                         || item.Contains("MOL TÖLTÖ") || item.Contains("GP T") || item.Contains("AUCHAN AUTBEN") || item.Contains("; OMV"))
                     {
 
@@ -1417,13 +1417,13 @@ namespace iAboutMoney
 
             foreach (var item in WriteAndReadClass.SmsArray)
             {
-                if (item.Contains(year + month))
+                if (item.Contains(month+year))
                 {
                     if (item.Contains("SIKERTELEN") || item.Contains("STORNO") && !item.Contains("AUCHAN AUTBEN"))
                     {
 
                     }
-               else if (item.Contains("SHELL TÖLTÖ") || item.Contains("MOL TÖLTÖ") ||
+               else if (item.Contains("SHELL") || item.Contains("MOL TÖLTÖ") ||
                         item.Contains("GP T") || item.Contains("; OMV"))
                     {
                         string haviTankolas = SmsFileWorker.GetBetween(item, ": -", " HUF;");

@@ -415,7 +415,7 @@
     <value>2</value>
   </data>
   <data name="bunifuSeparator3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 200</value>
+    <value>87, 200</value>
   </data>
   <data name="bunifuSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>1, 5</value>
@@ -445,7 +445,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 205</value>
+    <value>76, 205</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 12</value>
